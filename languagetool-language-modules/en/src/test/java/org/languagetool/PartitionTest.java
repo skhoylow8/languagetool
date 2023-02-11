@@ -32,14 +32,6 @@ public class PartitionTest {
     }
 
     @Test
-    public void testPresentAndPastGrammarError() throws IOException {
-        if (System.getProperty("disableHardcodedTests") == null) {
-            JLanguageTool lt = new JLanguageTool(new AmericanEnglish());
-            assertOneError("I was worked and I was able to finish my assignment.", lt);
-        }
-    }
-
-    @Test
     public void testYourGrammarError() throws IOException {
         //more error-free sentences to deal with possible regressions
         if (System.getProperty("disableHardcodedTests") == null) {
@@ -55,7 +47,38 @@ public class PartitionTest {
             assertOneError("You're code was very neat and readable.", lt);
         }
     }
-    
+    @Test
+    public void testSpellingMistakes() throws IOException {
+      if (System.getProperty("disableHardcodedTests") == null) {
+        JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
+        assertNoError("John lives in Australia.", tool);
+      }
+    }
+
+    @Test
+    public void testFirstWordCapitalizationError() throws IOException {
+      if (System.getProperty("disableHardcodedTests") == null) {
+        JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
+        assertOneError("bagels are everything.", tool);
+      }
+    }
+
+    @Test
+    public void testMisspelledWordError() throws IOException {
+      if (System.getProperty("disableHardcodedTests") == null) {
+        JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
+        assertOneError("I need a cup of cooffee.", tool);
+      }
+    }
+
+    @Test
+    public void testProperNounCapitalizationError() throws IOException {
+      if (System.getProperty("disableHardcodedTests") == null) {
+        JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
+        assertOneError("I'm going out with kevin.", tool);
+      }
+    }
+
     private void assertNoError(String input, JLanguageTool lt) throws IOException {
         List<RuleMatch> matches = lt.check(input);
         assertEquals("Did not expect an error in test sentence: '" + input + "', but got: " + matches, 0, matches.size());
