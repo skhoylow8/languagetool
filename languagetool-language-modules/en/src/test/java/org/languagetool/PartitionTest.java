@@ -51,7 +51,7 @@ public class PartitionTest {
     public void testSpellingMistakes() throws IOException {
       if (System.getProperty("disableHardcodedTests") == null) {
         JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
-        assertNoError("John lives in Australia.", tool);
+        assertOneError("John lehves in Australia.", tool);
       }
     }
 
