@@ -131,6 +131,7 @@ class LanguageToolSupport {
     // those that are interested in this event
     for (int i = listeners.length - 2; i >= 0; i -= 2) {
       if (listeners[i] == LanguageToolListener.class) {
+
         // Lazily create the event:
         ((LanguageToolListener) listeners[i + 1]).languageToolEventOccurred(event);
       }
@@ -450,6 +451,7 @@ class LanguageToolSupport {
     fireEvent(LanguageToolEvent.Type.RULE_DISABLED, null);
   }
 
+
   void enableRule(String ruleId) {
     Rule rule = this.getRuleForId(ruleId);
     if (rule == null) {
@@ -698,6 +700,7 @@ class LanguageToolSupport {
   }
 
   private synchronized List<RuleMatch> checkText(Object caller) throws IOException {
+    this.mustDetectLanguage = true;
     if (this.mustDetectLanguage) {
       mustDetectLanguage = false;
       if (!this.textComponent.getText().isEmpty()) {
@@ -788,7 +791,8 @@ class LanguageToolSupport {
     updateHighlights();
   }
 
-  private void updateHighlights(String disabledRule) {
+  void updateHighlights(String disabledRule) {
+    System.out.println("highlight" + disabledRule);
     List<Span> spans = new ArrayList<>();
     List<RuleMatch> matches = new ArrayList<>();
     for (RuleMatch match : ruleMatches) {
@@ -802,6 +806,8 @@ class LanguageToolSupport {
   }
 
   private void updateHighlights(List<RuleMatch> matches) {
+
+    matches.forEach(System.out::println);
     List<Span> spans = new ArrayList<>();
     for (RuleMatch match : matches) {
       spans.add(new Span(match));
@@ -817,7 +823,7 @@ class LanguageToolSupport {
     updateHighlights();
   }
 
-  private void updateHighlights() {
+  void updateHighlights() {
     removeHighlights();
 
     Highlighter h = textComponent.getHighlighter();

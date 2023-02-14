@@ -141,7 +141,7 @@ import org.languagetool.tools.StringTools;
  *
  * @author Daniel Naber
  */
-public final class Main {
+public class Main {
 
   static final String EXTERNAL_LANGUAGE_SUFFIX = " (ext.)";
   
@@ -160,16 +160,16 @@ public final class Main {
   private static final int WINDOW_HEIGHT = 550;
   private static final int MAX_RECENT_FILES = 8;
 
-  private final ResourceBundle messages;
+  final ResourceBundle messages;
   private final List<Language> externalLanguages = new ArrayList<>();
 
   private JFrame frame;
   private JDialog taggerDialog;
   private JTextPane taggerArea;
-  private JTextArea textArea;
+  JTextArea textArea;
   private TextLineNumber textLineNumber;
   private JScrollPane numberedTextAreaPane;
-  private JTextPane resultArea;
+  JTextPane resultArea;
   private LanguageComboBox languageBox;
   private CheckboxMenuItem enableHttpServerItem;
   private HTTPServer httpServer;
@@ -179,7 +179,7 @@ public final class Main {
   private boolean isInTray;
   private boolean taggerShowsDisambigLog = false;
 
-  private LanguageToolSupport ltSupport;
+  LanguageToolSupport ltSupport;
   private OpenAction openAction;
   private SaveAction saveAction;
   private SaveAsAction saveAsAction;
@@ -199,7 +199,7 @@ public final class Main {
   private JSplitPane splitPane;
   private final JPanel mainPanel = new JPanel();
 
-  private Main(LocalStorage localStorage) {
+  Main(LocalStorage localStorage) {
     this.localStorage = localStorage;
     messages = JLanguageTool.getMessageBundle();
   }
@@ -212,7 +212,7 @@ public final class Main {
     loadFile(file);
   }
 
-  private void loadFile(File file) {
+  void loadFile(File file) {
     try (FileInputStream inputStream = new FileInputStream(file)) {
       BOMInputStream bomIn = new BOMInputStream(inputStream, false,
               ByteOrderMark.UTF_8, ByteOrderMark.UTF_16BE, ByteOrderMark.UTF_16LE,
@@ -337,7 +337,7 @@ public final class Main {
     frame.setTitle(sb.toString());
   }
 
-  private void createGUI() {
+  void createGUI() {
     loadRecentFiles();
     frame = new JFrame("LanguageTool " + JLanguageTool.VERSION);
 
@@ -524,6 +524,7 @@ public final class Main {
           //the CHECKING_FINISHED event
         } else if (event.getType() == LanguageToolEvent.Type.RULE_DISABLED) {
           String msg = org.languagetool.tools.Tools.i18n(messages, "checkDoneNoTime", event.getSource().getMatches().size());
+          System.out.println(msg);
           statusLabel.setText(msg);
         }
       }
@@ -866,7 +867,7 @@ public final class Main {
     }
   }
 
-  private void showGUI() {
+  void showGUI() {
     frame.setVisible(true);
   }
 

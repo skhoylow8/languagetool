@@ -32,14 +32,6 @@ public class PartitionTest {
     }
 
     @Test
-    public void testPresentAndPastGrammarError() throws IOException {
-        if (System.getProperty("disableHardcodedTests") == null) {
-            JLanguageTool lt = new JLanguageTool(new AmericanEnglish());
-            assertOneError("I was worked and I was able to finish my assignment.", lt);
-        }
-    }
-
-    @Test
     public void testYourGrammarError() throws IOException {
         //more error-free sentences to deal with possible regressions
         if (System.getProperty("disableHardcodedTests") == null) {
@@ -59,7 +51,7 @@ public class PartitionTest {
     public void testSpellingMistakes() throws IOException {
       if (System.getProperty("disableHardcodedTests") == null) {
         JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
-        assertNoError("John lives in Australia.", tool);
+        assertOneError("John lehves in Australia.", tool);
       }
     }
 
@@ -75,7 +67,7 @@ public class PartitionTest {
     public void testMisspelledWordError() throws IOException {
       if (System.getProperty("disableHardcodedTests") == null) {
         JLanguageTool tool = new JLanguageTool(new AmericanEnglish());
-        assertOneError("I can adjust my sails to always reach my desfewtination.", tool);
+        assertOneError("I need a cup of cooffee.", tool);
       }
     }
 

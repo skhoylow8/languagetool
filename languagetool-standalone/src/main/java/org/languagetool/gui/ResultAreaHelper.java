@@ -82,6 +82,7 @@ class ResultAreaHelper implements LanguageToolListener, HyperlinkListener {
   private boolean enabled = false;
 
   static void install(ResourceBundle messages, LanguageToolSupport ltSupport, JTextPane pane) {
+    System.out.println("install");
     Object prev = pane.getClientProperty(KEY);
     if (prev instanceof ResultAreaHelper) {
       enable(pane);
@@ -150,6 +151,7 @@ class ResultAreaHelper implements LanguageToolListener, HyperlinkListener {
 
   @Override
   public void languageToolEventOccurred(LanguageToolEvent event) {
+    System.out.println("Occurred");
     if (event.getType() == LanguageToolEvent.Type.CHECKING_STARTED) {
       Language lang = ltSupport.getLanguage();
       String langName;
@@ -166,8 +168,10 @@ class ResultAreaHelper implements LanguageToolListener, HyperlinkListener {
         statusPane.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
       }
     } else if (event.getType() == LanguageToolEvent.Type.CHECKING_FINISHED) {
+      System.out.println("Finish");
       setRunTime(event.getElapsedTime());
       String inputText = event.getSource().getTextComponent().getText();
+      System.out.println(inputText);
       displayResult(inputText, event.getSource().getMatches());
       if (event.getCaller() == this) {
         statusPane.setCursor(Cursor.getDefaultCursor());
@@ -322,6 +326,7 @@ class ResultAreaHelper implements LanguageToolListener, HyperlinkListener {
 
   @Override
   public void hyperlinkUpdate(HyperlinkEvent e) {
+    System.out.println("Hyper");
     if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
       URL url = e.getURL();
       try {
@@ -341,8 +346,10 @@ class ResultAreaHelper implements LanguageToolListener, HyperlinkListener {
     RuleLink ruleLink = RuleLink.getFromString(uri);
     String ruleId = ruleLink.getId();
     if (uri.startsWith(DEACTIVATE_URL)) {
+      System.out.println(uri);
       ltSupport.disableRule(ruleId);
     } else {
+      System.out.println(uri);
       ltSupport.enableRule(ruleId);
     }
     ltSupport.getConfig().saveConfiguration(ltSupport.getLanguage());
