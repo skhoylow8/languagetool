@@ -14,12 +14,13 @@
 
 # All correct words should be properly tagged in the tagger dictionary or in added.txt 
 
+be-bop+
 centre-europeu+
 centre-europeus+
 centre-europea+
 centre-europees+
 torca-boques+
-porta-tovallos+
+porta-tovallons+
 pro-rús+
 pro-russa+
 pro-russos+

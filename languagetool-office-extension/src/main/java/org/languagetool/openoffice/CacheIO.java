@@ -78,19 +78,6 @@ public class CacheIO implements Serializable {
    */
   private static String getDocumentPath(XComponent xComponent) {
     try {
-/*      
-      XTextDocument curDoc = UnoRuntime.queryInterface(XTextDocument.class, xComponent);
-      if (curDoc == null) {
-        MessageHandler.printToLogFile("CacheIO: getDocumentPath: XTextDocument not found!");
-        return null;
-      }
-      XController xController = curDoc.getCurrentController();
-      if (xController == null) {
-        MessageHandler.printToLogFile("CacheIO: getDocumentPath: XController not found!");
-        return null;
-      }
-      XModel xModel = xController.getModel();
-*/
       XModel xModel = UnoRuntime.queryInterface(XModel.class, xComponent);
       if (xModel == null) {
         MessageHandler.printToLogFile("CacheIO: getDocumentPath: XModel not found!");
@@ -125,6 +112,10 @@ public class CacheIO implements Serializable {
       return null;
     }
     File cacheDir = OfficeTools.getCacheDir();
+    if (cacheDir == null) {
+      MessageHandler.printToLogFile("CacheIO: getCachePath: cacheDir == null!");
+      return null;
+    }
     if (DEBUG_MODE) {
       MessageHandler.printToLogFile("CacheIO: getCachePath: cacheDir: " + cacheDir.getAbsolutePath());
     }
@@ -186,7 +177,7 @@ public class CacheIO implements Serializable {
     String cachePath = getCachePath(true);
     if (cachePath != null) {
       try {
-        if (exceedsSaveSize(docCache)) {
+        if (!ignoredMatches.isEmpty() || exceedsSaveSize(docCache)) {
           allCaches = new AllCaches(docCache, paragraphsCache, mDocHandler.getAllDisabledRules(), config.getDisabledRuleIds(), config.getDisabledCategoryNames(), 
               config.getEnabledRuleIds(), ignoredMatches, JLanguageTool.VERSION);
           saveAllCaches(cachePath);

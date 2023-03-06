@@ -1493,6 +1493,18 @@
     </pattern>
     <disambig action="filter" postag="V.+"/>
   </rule>
+
+  <rule id="VEIAR_VIR" name="Veio a + Infinitive">
+    <!-- Created by Susana Boatto, Portuguese rule, 2023-01-25  	-->
+    <pattern>
+      <marker>
+        <token>veio</token>
+      </marker>
+      <token>a</token>
+      <token postag="VMN0000"/>
+    </pattern>
+    <disambig action="filter" postag="VMIS3S0"/>
+  </rule>
   
   <rulegroup id="PERIFRASES" name="Perífrases de infinitivo">
     <rule>
@@ -1696,7 +1708,7 @@
     </rule>
     <rule>
       <pattern>
-        <token inflected='yes' regexp='yes'>caminhar|correr|explicar|inaugurar|ver|ele|comprar</token>
+        <token inflected='yes' regexp='yes'>caminhar|correr|explicar|inaugurar|ver|comprar</token>
         <token min='0' postag='R.' postag_regexp='yes'/>
         <marker>
           <token>a</token>
@@ -1704,10 +1716,21 @@
       </pattern>
       <disambig action="remove" postag="S.+"/>
     </rule>
+    <rule>
+      <pattern>
+        <token postag="V.+" postag_regexp="yes" inflected="yes" regexp="yes">começar|levar|ir|chegar|feder</token>
+        <token min="0" postag="R." postag_regexp="yes"/>
+        <marker>
+          <token>a</token>
+        </marker>
+      </pattern>
+      <disambig action="filter" postag="S.+"/>
+      <example type="untouched">...desde que foi inaugurada a República de Itália, em 1946,...</example>
+    </rule>
     <rule><!-- TODO too agressive. try disabling this rule in a day without many changes and see regression results -->
       <pattern>
           <token postag="V.+" postag_regexp="yes">
-            <exception>para</exception>
+            <exception regexp="yes">para|como</exception>
             <exception inflected='yes' regexp='yes'>caminhar|correr|explicar|inaugurar|ver|ele|comprar</exception></token>
           <token min='0' postag='R.' postag_regexp='yes'/>
         <marker>
@@ -1759,6 +1782,17 @@
       <disambig action="filter" postag="S.+"/>
     </rule>
   </rulegroup>
+  
+  <rule id="A_BANDEIRA" name="a bandeira (det + noun)">
+    <!-- TODO: generalize me! -->
+    <pattern>
+      <token>a</token>
+      <marker>
+        <token postag="NCFS000">bandeira</token>  
+      </marker>
+    </pattern>
+    <disambig action="remove" postag="V.[ISM].*"></disambig>
+  </rule>
   
   <rulegroup id="DET-NOUN_PRON-VERB" name="det+noun vs. pron+verb 'a casa'">
     <rule>

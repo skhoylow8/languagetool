@@ -1444,6 +1444,62 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
     put("aufm", w -> Arrays.asList("auf dem", "auf einem", "auf"));
     put("Ausm", w -> Arrays.asList("Aus dem", "Aus einem", "Aus"));
     put("ausm", w -> Arrays.asList("aus dem", "aus einem", "aus"));
+    put("best", w -> Arrays.asList("beste", "bester", "Best"));
+    put("Bitet", w -> Arrays.asList("Bitte", "Bittet", "Bidet", "Bietet"));
+    put("lage", w -> Arrays.asList("lange", "Lage", "läge", "lache"));
+    put("mur", w -> Arrays.asList("mir", "zur", "nur", "für"));
+    put("ass", w -> Arrays.asList("Ass", "aß", "aus", "dass"));
+    put("Blat", w -> Arrays.asList("Blatt", "Blut", "Bald", "Bat"));
+    put("much", w -> Arrays.asList("mich", "auch", "Buch"));
+    put("scheibe", w -> Arrays.asList("Scheibe", "schreibe"));
+    put("vielmal", w -> Arrays.asList("Vielmal", "vielmals", "viermal", "viel mal"));
+    put("bachten", w -> Arrays.asList("brachten", "beachten", "machten", "pachten"));
+    put("brache", w -> Arrays.asList("brauche", "brachte", "brach", "bräche"));
+    put("beliebn", w -> Arrays.asList("beliebt", "bleiben", "belieben"));
+    put("Kono", w -> Arrays.asList("Kino", "Kongo", "Konto"));
+    put("aich", w -> Arrays.asList("ich", "auch", "sich", "eich"));
+    put("anahme", w -> Arrays.asList("Annahme", "nahmen", "nahe", "nahmen"));
+    put("anleigen", w -> Arrays.asList("anlegen", "Anliegen", "anliegen", "anzeigen"));
+    put("besproch", w -> Arrays.asList("besprach", "besprich", "bespreche", "besprochen"));
+    put("dan", w -> Arrays.asList("dann", "den", "das", "an"));
+    put("lase", w -> Arrays.asList("las", "lasse", "Nase"));
+    put("Shr", w -> Arrays.asList("Sehr", "Ihr", "Uhr", "Sir"));
+    put("start", w -> Arrays.asList("Start", "stark", "statt", "stand"));
+    put("neuse", w -> Arrays.asList("neues", "neue"));
+    put("Standart", w -> Arrays.asList("Standard", "Standort"));
+    put("wiessen", w -> Arrays.asList("wissen", "weisen", "wiesen"));
+    put("schnells", w -> Arrays.asList("schnell", "schnellst"));
+    put("sn", w -> Arrays.asList("an", "in"));
+    put("eie", w -> Arrays.asList("die", "wie", "eine", "sie"));
+    put("Mei", w -> Arrays.asList("Mai", "Bei", "Sei", "Mein"));
+    put("bim", w -> Arrays.asList("bin", "im", "bis", "beim"));
+    put("lehr", w -> Arrays.asList("mehr", "lehrt", "sehr", "leer"));
+    put("sm", w -> Arrays.asList("am", "im", "am", "SM"));
+    put("tuh", w -> Arrays.asList("tun", "tut", "tue", "Kuh"));
+    put("intere", w -> Arrays.asList("interne", "innere", "hintere", "untere"));
+    put("unterschiede", w -> Arrays.asList("Unterschiede", "unterscheide", "unterschiebe", "unterschieden"));
+    put("bi", "bei");
+    put("Erhlich", "Ehrlich");
+    put("gestrest", "gestresst");
+    put("rauschicken", "rausschicken");
+    put("stoniren", "stornieren");
+    put("drinen", "drinnen");
+    put("gestigen", "gestiegen");
+    put("prozes", "Prozess");
+    put("Auschluss", "Ausschluss");
+    put("Anbeot", "Angebot");
+    put("Paleten", "Paletten");
+    put("mächten", "möchten");
+    put("auschreibung", "Ausschreibung");
+    put("worter", "Wörter");
+    put("Ihrerer", "Ihrer");
+    put("Modelles", "Modells");
+    put("entchuldigen", "entschuldigen");
+    put("kundne", "Kunden");
+    put("bestellun", "Bestellung");
+    put("[Nn]umber", "Nummer");
+    put("mirgen", "morgen");
+    put("korekkt", "korrekt");
     put("Bs", "Bis");
     put("Biß", "Biss");
     put("bs", "bis");
@@ -2592,6 +2648,17 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
       return topMatch(word.replaceFirst("brilliant", "brillant"));
     }
     switch (word) {
+      case "Büffet":
+      case "Buffett":
+      case "Bufett":
+      case "Büffett":
+      case "Bufet":
+      case "Büfet":
+        if (language.getShortCodeWithCountryAndVariant().equals("de-CH") || language.getShortCodeWithCountryAndVariant().equals("de-AT")) {
+          return topMatch("Buffet", "zum Verzehr bereitgestellte Speisen");
+        } else {
+          return topMatch("Büfett", "zum Verzehr bereitgestellte Speisen");
+        }
       case "do": return topMatch("so");
       case "offensichtlicherweise": return topMatch("offensichtlich");
       case "Offensichtlicherweise": return topMatch("Offensichtlich");
@@ -3025,6 +3092,8 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
       case "Anteilname": return topMatch("Anteilnahme");
       case "Mahnungswesen": return topMatch("Mahnwesen");
       case "Mahnungswesens": return topMatch("Mahnwesens");
+      case "Geruchsinn": return topMatch("Geruchssinn");
+      case "Geruchsinns": return topMatch("Geruchssinns");
       case "Optin": return topMatch("Opt-in");
       case "Stk": return topMatch("Stk.");
       case "T-shirt": return topMatch("T-Shirt");
@@ -3032,6 +3101,35 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
       case "T-shirts": return topMatch("T-Shirts");
       case "t-shirts": return topMatch("T-Shirts");
       case "umgangsprachlich": return topMatch("umgangssprachlich");
+      case "E-Mai": return topMatch("E-Mail");
+      case "E-Mais": return topMatch("E-Mails");
+      case "Ubahn": return topMatch("U-Bahn");
+      case "UBahn": return topMatch("U-Bahn");
+      case "Ubahnen": return topMatch("U-Bahnen");
+      case "UBahnen": return topMatch("U-Bahnen");
+      case "Ubahnhof": return topMatch("U-Bahnhof");
+      case "UBahnhof": return topMatch("U-Bahnhof");
+      case "Ubahnhofs": return topMatch("U-Bahnhofs");
+      case "UBahnhofs": return topMatch("U-Bahnhofs");
+      case "Ubahnhöfe": return topMatch("U-Bahnhöfe");
+      case "UBahnhöfe": return topMatch("U-Bahnhöfe");
+      case "Ubahnhöfen": return topMatch("U-Bahnhöfen");
+      case "UBahnhöfen": return topMatch("U-Bahnhöfen");
+      case "Ubahnlinie": return topMatch("U-Bahnlinie");
+      case "UBahnlinie": return topMatch("U-Bahnlinie");
+      case "Ubahnlinien": return topMatch("U-Bahnlinien");
+      case "UBahnlinien": return topMatch("U-Bahnlinien");
+      case "Ubahnnetz": return topMatch("U-Bahnnetz");
+      case "UBahnnetz": return topMatch("U-Bahnnetz");
+      case "Ubahnnetze": return topMatch("U-Bahnnetze");
+      case "UBahnnetze": return topMatch("U-Bahnnetze");
+      case "Ubahnnetzes": return topMatch("U-Bahnnetzes");
+      case "UBahnnetzes": return topMatch("U-Bahnnetzes");
+      case "Ubahntunnel": return topMatch("U-Bahntunnel");
+      case "UBahntunnel": return topMatch("U-Bahntunnel");
+      case "Ubahntunnels": return topMatch("U-Bahntunnels");
+      case "UBahntunnels": return topMatch("U-Bahntunnels");
+      case "Gelantine": return topMatch("Gelatine");
     }
     return Collections.emptyList();
   }

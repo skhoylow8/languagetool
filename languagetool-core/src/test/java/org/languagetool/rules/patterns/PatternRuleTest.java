@@ -462,6 +462,9 @@ public class PatternRuleTest extends AbstractPatternRuleTest {
       if (msg.toLowerCase().contains("tbd")) {
         fail("Unfinished message (contains 'tbd') of rule " + rule.getFullId() + ": '" + msg + "'");
       }
+      if (msg.startsWith(">")) {
+        System.err.println("*** WARNING: Message of rule " + rule.getFullId() + " starts with '>', is this a typo?: '" + rule.getMessage() + "'");
+      }
       if (lang.getShortCode().matches("de|en|fr|es|nl")) {  // not yet 'pt' due to many matches there
         if (!msg.trim().equals(rule.getMessage())) {
           System.err.println("*** WARNING: Message of rule " + rule.getFullId() + " starts or ends with spaces: '" + rule.getMessage() + "'");
@@ -579,14 +582,17 @@ public class PatternRuleTest extends AbstractPatternRuleTest {
           addError(rule, "Empty incorrect example sentence after cleaning/trimming.");
           continue;
       }
-      
+      if (origBadSentence.startsWith(">") && badSentence.length() > 1) {
+        System.err.println("*** WARNING: example of rule " + rule.getFullId() + " starts with '>', is this a typo?: '" + origBadSentence + "'");
+      }
+
       String marker = origBadSentence.substring(expectedMatchStart + "<marker>".length(),
           origBadSentence.indexOf("</marker>"));
       if (marker.startsWith(", ") && origBadExample.getCorrections().stream()
           .anyMatch(k -> !k.startsWith(" ") && !k.startsWith(",") && !k.startsWith("?") && !k.startsWith(".")
-              && !k.startsWith(":") && !k.startsWith(";") && !k.startsWith("…"))) {
+              && !k.startsWith(":") && !k.startsWith(";") && !k.startsWith("…") && !k.startsWith("-") && !k.startsWith("–"))) {
         System.err.println("*** WARNING: " + lang.getName() + " rule " + rule.getFullId() + " removes ', ' but "
-            + "doesn't have a space, comma, colon, semicolon, or dot at the start of the suggestion: " + origBadSentence
+            + "doesn't have a space, comma, colon, semicolon, hyphen or dot at the start of the suggestion: " + origBadSentence
             + " => " + origBadExample.getCorrections());
       }
 
@@ -780,6 +786,9 @@ public class PatternRuleTest extends AbstractPatternRuleTest {
       if (!(goodSentence.trim().length() > 0)) {
         addError(rule, "Empty correct example.");
         continue;
+      }
+      if (goodSentence.startsWith(">") && goodSentence.length() > 1) {
+        System.err.println("*** WARNING: example of rule " + rule.getFullId() + " starts with '>', is this a typo?: '" + goodSentence + "'");
       }
       boolean isMatched = false;
       // necessary for XML Pattern rules containing <or>

@@ -938,7 +938,7 @@ SV Vorwärts [A-ZÄÖÜ][a-zäöüß]+
 Tanzenden? Türmen?
 Taco Bells?
 Technische[nsm]? Hilfswerks?
-Technischen? (Fachh|H)ochschulen?|Universität(en)?
+Technische[nr]? (Fachh|H)ochschulen?|Universität(en)?
 Technische[nrm]? Direktors?|Einkäufers?
 Tegeler Fließ
 Tel Avivs?
@@ -1165,3 +1165,12 @@ Hart aber Fairs?
 Ha (Jung.*|Woo.*)
 Wirtschaftspolitischen? Gesellschaft
 Matter Standards?
+(Ascotop|Zomig) Nasal
+Raquel Welch
+Wissenschaftlichen? Institut(e?s)? für
+Festen? Fehmarnbeltquerung
+Tasmanische[rn]? (See|Tiger[sn]?|Teufel[sn]?)
+Neuseeländischen? Alpen
+Taiwanesische[nr]? Dollars?
+Thailändische[nr]? Bahts?
+Tate Modern

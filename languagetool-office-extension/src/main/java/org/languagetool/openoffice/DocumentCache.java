@@ -46,7 +46,6 @@ public class DocumentCache implements Serializable {
   public final static int CURSOR_TYPE_ENDNOTE = 0;
   public final static int CURSOR_TYPE_FOOTNOTE = 1;
   public final static int CURSOR_TYPE_HEADER_FOOTER = 2;
-//  public final static int CURSOR_TYPE_FRAME = 3;
   public final static int CURSOR_TYPE_SHAPE = 3;
   public final static int CURSOR_TYPE_TEXT = 4;
   public final static int CURSOR_TYPE_TABLE = 5;
@@ -79,7 +78,6 @@ public class DocumentCache implements Serializable {
   private int nEndnote = 0;
   private int nFootnote = 0;
   private int nHeaderFooter = 0;
-//  private int nFrame = 0;
   private int nShape = 0;
   private int nText = 0;
   private int nTable = 0;
@@ -101,8 +99,6 @@ public class DocumentCache implements Serializable {
   }
 
   DocumentCache(DocumentCache in) {
-//    MessageHandler.printToLogFile("DocumentCache: init: Number waiting: " + rwLock.getQueueLength());
-//    MessageHandler.printToLogFile("DocumentCache: init: " + rwLock.getWriteHoldCount() + " writer is writing: "+ Thread.currentThread().getName());
     rwLock.writeLock().lock();
     try {
       isReset = true;
@@ -139,7 +135,6 @@ public class DocumentCache implements Serializable {
       }
       nText = textParagraphs.get(CURSOR_TYPE_TEXT).size();
       nTable = textParagraphs.get(CURSOR_TYPE_TABLE).size();
-//      nFrame = textParagraphs.get(CURSOR_TYPE_FRAME).size();
       nShape = textParagraphs.get(CURSOR_TYPE_SHAPE).size();
       nFootnote = textParagraphs.get(CURSOR_TYPE_FOOTNOTE).size();
       nEndnote = textParagraphs.get(CURSOR_TYPE_ENDNOTE).size();
@@ -159,8 +154,6 @@ public class DocumentCache implements Serializable {
       MessageHandler.printToLogFile("DocumentCache:refresh: isReset == true: return");
       return;
     }
-//    MessageHandler.printToLogFile("DocumentCache: refresh: Number waiting: " + rwLock.getQueueLength());
-//    MessageHandler.printToLogFile("DocumentCache: refresh: " + rwLock.getWriteHoldCount() + " writer is writing: "+ Thread.currentThread().getName());
     rwLock.writeLock().lock();
     isReset = true;
     try {
@@ -186,6 +179,9 @@ public class DocumentCache implements Serializable {
     try {
       long startTime = System.currentTimeMillis();
       DocumentCursorTools docCursor = document.getDocumentCursorTools();
+      if (docCursor == null) {
+        docCursor = new DocumentCursorTools(document.getXComponent());
+      }
       FlatParagraphTools flatPara = document.getFlatParagraphTools();
       List<String> paragraphs = new ArrayList<String>();
       List<List<Integer>> chapterBegins = new ArrayList<List<Integer>>();
@@ -203,19 +199,11 @@ public class DocumentCache implements Serializable {
       for (int i = 0; i < NUMBER_CURSOR_TYPES; i++) {
         documentTexts.add(null);
       }
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllText");
       documentTexts.set(CURSOR_TYPE_TEXT, docCursor.getAllTextParagraphs());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllTable");
       documentTexts.set(CURSOR_TYPE_TABLE, docCursor.getTextOfAllTables());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllFrame");
-//      documentTexts.set(CURSOR_TYPE_FRAME, docCursor.getTextOfAllFrames());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllShape");
       documentTexts.set(CURSOR_TYPE_SHAPE, docCursor.getTextOfAllShapes());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllFootnote");
       documentTexts.set(CURSOR_TYPE_FOOTNOTE, docCursor.getTextOfAllFootnotes());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllEndnote");
       documentTexts.set(CURSOR_TYPE_ENDNOTE, docCursor.getTextOfAllEndnotes());
-//      MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllHeader");
       documentTexts.set(CURSOR_TYPE_HEADER_FOOTER, docCursor.getTextOfAllHeadersAndFooters());
       for (int i = 0; i < NUMBER_CURSOR_TYPES; i++) {
         if(documentTexts.get(i) == null) {
@@ -224,7 +212,6 @@ public class DocumentCache implements Serializable {
       }
       nText = documentTexts.get(CURSOR_TYPE_TEXT).paragraphs.size();
       nTable = documentTexts.get(CURSOR_TYPE_TABLE).paragraphs.size();
-//      nFrame = documentTexts.get(CURSOR_TYPE_FRAME).paragraphs.size();
       nShape = documentTexts.get(CURSOR_TYPE_SHAPE).paragraphs.size();
       nFootnote = documentTexts.get(CURSOR_TYPE_FOOTNOTE).paragraphs.size();
       nEndnote = documentTexts.get(CURSOR_TYPE_ENDNOTE).paragraphs.size();
@@ -245,7 +232,14 @@ public class DocumentCache implements Serializable {
         chapterBegins.add(documentText.headingNumbers);
         deletedChars.add(documentText.deletedCharacters);
       }
-//        MessageHandler.printToLogFile("DocumentCache: refreshWriterCache: call getAllFlatParagraphs");
+      if (flatPara == null) {
+        flatPara = document.getFlatParagraphTools();
+      }
+      if (flatPara == null) {
+        MessageHandler.printToLogFile(
+            "WARNING: DocumentCache: refresh: flatPara == null - ParagraphCache not initialised");
+        return;
+      }
       paragraphContainer = flatPara.getAllFlatParagraphs(fixedLocale);
       if (paragraphContainer == null) {
         MessageHandler.printToLogFile(
@@ -517,7 +511,6 @@ public class DocumentCache implements Serializable {
   private void mapParagraphs(List<String> paragraphs, List<TextParagraph> toTextMapping, List<List<Integer>> toParaMapping,
         List<List<Integer>> chapterBegins, List<SerialLocale> locales, List<int[]> footnotes, List<List<String>> textParas, 
         List<List<Integer>> deletedCharacters, List<List<List<Integer>>> deletedChars) {
-//    MessageHandler.printToLogFile("DocumentCache: mapParagraphs called");
     if (textParas != null && !textParas.isEmpty()) {
       List<List<Integer>> nMapped = new ArrayList<>();  // Mapped paragraphs per cursor type
       List<Integer> nNext = new ArrayList<>();          //  Next assumed paragraph number for cursor type
@@ -535,7 +528,6 @@ public class DocumentCache implements Serializable {
         MessageHandler.printToLogFile("DocumentCache: mapParagraphs: Unknown paragraphs: " + nUnknown);
       }
       for (int j = 0; j < NUMBER_CURSOR_TYPES; j++) {
-//        if (j != CURSOR_TYPE_TEXT && j != CURSOR_TYPE_FRAME) {
         if (j != CURSOR_TYPE_TEXT) {
           for (int i = 0; i < textParas.get(j).size(); i++) {
             toParaMapping.get(j).add(-1);
@@ -556,7 +548,6 @@ public class DocumentCache implements Serializable {
         boolean firstTextDone = nMapped.get(CURSOR_TYPE_ENDNOTE).size() == textParas.get(CURSOR_TYPE_ENDNOTE).size()
             && nMapped.get(CURSOR_TYPE_FOOTNOTE).size() == textParas.get(CURSOR_TYPE_FOOTNOTE).size();
         boolean secondTextDone = firstTextDone 
-//            && toParaMapping.get(CURSOR_TYPE_FRAME).size() == textParas.get(CURSOR_TYPE_FRAME).size()
             && nMapped.get(CURSOR_TYPE_SHAPE).size() == textParas.get(CURSOR_TYPE_SHAPE).size()
             && nMapped.get(CURSOR_TYPE_HEADER_FOOTER).size() == textParas.get(CURSOR_TYPE_HEADER_FOOTER).size();
         //  test for footnote, endnote, frame or header/footer
@@ -576,25 +567,10 @@ public class DocumentCache implements Serializable {
         if (!secondTextDone && firstTextDone) {
           // test for header/footer, frame or shape
           for (int n = 2; n < NUMBER_CURSOR_TYPES - 2; n++) {
-/*
-            if (n == CURSOR_TYPE_FRAME) {
-              int j = nNext.get(n);
-              if (j < textParas.get(n).size()) {
-                if (isEqualText(paragraphs.get(i), textParas.get(n).get(j), getFootnotes(footnotes, i))) {
-                  isMapped = true;
-                  toTextMapping.add(new TextParagraph(n, j));
-                  toParaMapping.get(n).add(i);
-                  nNext.set(n, j + 1);
-                  break;
-                }
-              }
-            } else {
-*/            
-              if (mapTextParagraphsPerLoop(n, i, paragraphs, footnotes, textParas, toTextMapping, toParaMapping, nMapped, nNext)) {
-                isMapped = true;
-                break;
-              }
-//            }
+            if (mapTextParagraphsPerLoop(n, i, paragraphs, footnotes, textParas, toTextMapping, toParaMapping, nMapped, nNext)) {
+              isMapped = true;
+              break;
+            }
           }
           if (isMapped) {
             continue;
@@ -622,7 +598,6 @@ public class DocumentCache implements Serializable {
                 "'; secondTextDone: " + secondTextDone);
             String msg = "DocumentCache: mapParagraphs:\n";
             for (int k = 0; k < NUMBER_CURSOR_TYPES; k++) {
-//              if (k == CURSOR_TYPE_TEXT || k == CURSOR_TYPE_FRAME) {
               if (k == CURSOR_TYPE_TEXT) {
                 msg += "Actual Cursor Paragraph (Type " + k + "): " + 
                         (nNext.get(k) < textParas.get(k).size() ? textParas.get(k).get(nNext.get(k)) : "no paragraph left") + "\n";
@@ -679,12 +654,6 @@ public class DocumentCache implements Serializable {
             boolean equalText = j < textParas.get(CURSOR_TYPE_TEXT).size() &&
                 isEqualText(paragraphs.get(i), textParas.get(CURSOR_TYPE_TEXT).get(j), getFootnotes(footnotes, i));
             //  test if table and text are equal
-/*  TODO: remove after tests            
-            MessageHandler.printToLogFile("\nDocumentCache: mapParagraphs: equal  flat(" + i + "): " + paragraphs.get(i));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equal  text(" + j + "): " + textParas.get(CURSOR_TYPE_TEXT).get(j));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equal table(" + k + "): " + textParas.get(CURSOR_TYPE_TABLE).get(k));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equalText: " + equalText + "; equalTable: " + equalTable);
-*/
             int mk = k;
             int mj = j;
             int mi = i;
@@ -703,12 +672,6 @@ public class DocumentCache implements Serializable {
                 equalText = false;
               }
             }
-/*  TODO: remove after tests            
-            MessageHandler.printToLogFile("\nDocumentCache: mapParagraphs: equal  flat(" + mi + "): " + paragraphs.get(mi));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equal  text(" + mj + "): " + textParas.get(CURSOR_TYPE_TEXT).get(mj));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equal table(" + mk + "): " + textParas.get(CURSOR_TYPE_TABLE).get(mk));
-            MessageHandler.printToLogFile("DocumentCache: mapParagraphs: equalText: " + equalText + "; equalTable: " + equalTable);
-*/
             if (!equalText) {
               nMapped.get(CURSOR_TYPE_TABLE).add(k);
               nNext.set(CURSOR_TYPE_TABLE, k + 1);
@@ -745,7 +708,6 @@ public class DocumentCache implements Serializable {
           }
           String msg = "DocumentCache: mapParagraphs:\n";
           for (int k = 0; k < NUMBER_CURSOR_TYPES; k++) {
-//            if (k == CURSOR_TYPE_TEXT || k == CURSOR_TYPE_FRAME) {
             if (k == CURSOR_TYPE_TEXT) {
               msg += "Actual Cursor Paragraph (Type " + k + "): " + 
                       (nNext.get(k) < textParas.get(k).size() ? textParas.get(k).get(nNext.get(k)) : "no paragraph left") + "\n";
@@ -778,7 +740,6 @@ public class DocumentCache implements Serializable {
             && nMapped.get(CURSOR_TYPE_SHAPE).size() == textParas.get(CURSOR_TYPE_SHAPE).size()
             && nMapped.get(CURSOR_TYPE_HEADER_FOOTER).size() == textParas.get(CURSOR_TYPE_HEADER_FOOTER).size()
             && nMapped.get(CURSOR_TYPE_TABLE).size() == textParas.get(CURSOR_TYPE_TABLE).size();
-  //          && toParaMapping.get(CURSOR_TYPE_FRAME).size() == textParas.get(CURSOR_TYPE_FRAME).size();
         if (!isCorrectNonText) {
           //  Try to repair incorrect header/footer mapping
           for (int k = 0; k < NUMBER_CURSOR_TYPES; k++) {
@@ -791,7 +752,6 @@ public class DocumentCache implements Serializable {
           }
           isCorrectNonText = toParaMapping.get(CURSOR_TYPE_ENDNOTE).size() == textParas.get(CURSOR_TYPE_ENDNOTE).size()
               && toParaMapping.get(CURSOR_TYPE_FOOTNOTE).size() == textParas.get(CURSOR_TYPE_FOOTNOTE).size()
-  //            && toParaMapping.get(CURSOR_TYPE_FRAME).size() == textParas.get(CURSOR_TYPE_FRAME).size()
               && toParaMapping.get(CURSOR_TYPE_SHAPE).size() == textParas.get(CURSOR_TYPE_SHAPE).size()
               && toParaMapping.get(CURSOR_TYPE_HEADER_FOOTER).size() == textParas.get(CURSOR_TYPE_HEADER_FOOTER).size()
               && toParaMapping.get(CURSOR_TYPE_TABLE).size() == textParas.get(CURSOR_TYPE_TABLE).size();
@@ -855,12 +815,10 @@ public class DocumentCache implements Serializable {
             + "Endnotes: " + toParaMapping.get(CURSOR_TYPE_ENDNOTE).size() + " / " + textParas.get(CURSOR_TYPE_ENDNOTE).size() + "\n"
             + "Footnotes: " + toParaMapping.get(CURSOR_TYPE_FOOTNOTE).size() + " / " + textParas.get(CURSOR_TYPE_FOOTNOTE).size() + "\n"
             + "Headers/Footers: " + toParaMapping.get(CURSOR_TYPE_HEADER_FOOTER).size() + " / " + textParas.get(CURSOR_TYPE_HEADER_FOOTER).size() + "\n"
-//            + "Frames: " + toParaMapping.get(CURSOR_TYPE_FRAME).size() + " / " + textParas.get(CURSOR_TYPE_FRAME).size() + "\n"
             + "Shapes: " + toParaMapping.get(CURSOR_TYPE_SHAPE).size() + " / " + textParas.get(CURSOR_TYPE_SHAPE).size() + "\n"
             + "Tables: " + toParaMapping.get(CURSOR_TYPE_TABLE).size() + " / " + textParas.get(CURSOR_TYPE_TABLE).size() + "\n"
             + "Text: " + toParaMapping.get(CURSOR_TYPE_TEXT).size() + " / " + textParas.get(CURSOR_TYPE_TEXT).size() + "\n"
             + "Unknown: " + numUnknown + " / " + nUnknown;
-//        MessageHandler.showMessage(msg);
         MessageHandler.printToLogFile(msg);
       }
       nText = toParaMapping.get(CURSOR_TYPE_TEXT).size();
@@ -903,11 +861,6 @@ public class DocumentCache implements Serializable {
         MessageHandler.printToLogFile("DocumentCache: mapParagraphs: Number of locales: " + locales.size());
         MessageHandler.printToLogFile("DocumentCache: mapParagraphs: Number of Deleted Chars: " + deletedCharacters.size());
       }
-/*
-      for (int i = 0; i < locales.size(); i++) {
-        MessageHandler.printToLogFile("DocumentCache: mapParagraphs: Num: " + i + " locale: " + locales.get(i).toString());
-      }
-*/
     }
   }
   /**
@@ -952,7 +905,6 @@ public class DocumentCache implements Serializable {
     int notMapped = 0;
     for (int n = 0; n < sortedTextIds.size(); n++) {
       boolean found = false;
-//      for (int i = 0; !found && i < NUMBER_CURSOR_TYPES && nMapped.get(i) < textSortedTextIds.get(i).size(); i++) {
       for (int i = 0; !found && i < NUMBER_CURSOR_TYPES; i++) {
         List<Integer> txtNdIndexes = textSortedTextIds.get(i);
         for (int j = 0; !found && j < txtNdIndexes.size(); j++) {
@@ -960,10 +912,6 @@ public class DocumentCache implements Serializable {
             found = true;
             toParaMapping.get(i).set(j, n);
             toTextMapping.add(new TextParagraph(i, j));
-//            nMapped.set(i, nMapped.get(i) + 1);
-//          } else if(sortedTextIds.get(n) == 129) {
-//            MessageHandler.printToLogFile("Document cache: mapParagraphsWNI: not equal: sortedTextId: " + sortedTextIds.get(n) +
-//                "; txtNdIndexes: " + txtNdIndexes.get(j) + "; type: " + i);
           }
         }
       }
@@ -1294,7 +1242,6 @@ public class DocumentCache implements Serializable {
     documentElementsCount = in.documentElementsCount;
     nText = in.nText;
     nTable = in.nTable;
-//    nFrame = in.nFrame;
     nShape = in.nShape;
     nFootnote = in.nFootnote;
     nEndnote = in.nEndnote;
@@ -1360,7 +1307,8 @@ public class DocumentCache implements Serializable {
   public String getTextParagraph(TextParagraph textParagraph) {
     rwLock.readLock().lock();
     try {
-      return textParagraph.type == CURSOR_TYPE_UNKNOWN ? null : paragraphs.get(toParaMapping.get(textParagraph.type).get(textParagraph.number));
+      return textParagraph.type == CURSOR_TYPE_UNKNOWN ? null : 
+        textParagraph.number < 0 ? new String("") : paragraphs.get(toParaMapping.get(textParagraph.type).get(textParagraph.number));
     } finally {
       rwLock.readLock().unlock();
     }
@@ -1385,7 +1333,7 @@ public class DocumentCache implements Serializable {
   public Locale getTextParagraphLocale(TextParagraph textParagraph) {
     rwLock.readLock().lock();
     try {
-      return textParagraph.type == CURSOR_TYPE_UNKNOWN ? 
+      return textParagraph.type == CURSOR_TYPE_UNKNOWN || textParagraph.number < 0 ? 
         null : locales.get(toParaMapping.get(textParagraph.type).get(textParagraph.number)).toLocaleWithoutLabel();
     } finally {
       rwLock.readLock().unlock();
@@ -1398,8 +1346,8 @@ public class DocumentCache implements Serializable {
   public List<Integer> getTextParagraphDeletedCharacters(TextParagraph textParagraph) {
     rwLock.readLock().lock();
     try {
-      return textParagraph.type == CURSOR_TYPE_UNKNOWN ?
-        null : deletedCharacters.get(toParaMapping.get(textParagraph.type).get(textParagraph.number));
+      return textParagraph.type == CURSOR_TYPE_UNKNOWN ? null : 
+        textParagraph.number < 0 ? new ArrayList<Integer> () : deletedCharacters.get(toParaMapping.get(textParagraph.type).get(textParagraph.number));
     } finally {
       rwLock.readLock().unlock();
     }
@@ -1411,7 +1359,7 @@ public class DocumentCache implements Serializable {
   public int[] getTextParagraphFootnotes(TextParagraph textParagraph) {
     rwLock.readLock().lock();
     try {
-      return textParagraph.type == CURSOR_TYPE_UNKNOWN ? 
+      return textParagraph.type == CURSOR_TYPE_UNKNOWN || textParagraph.number < 0 ? 
         new int[0] : footnotes.get(toParaMapping.get(textParagraph.type).get(textParagraph.number));
     } finally {
       rwLock.readLock().unlock();
@@ -1424,7 +1372,7 @@ public class DocumentCache implements Serializable {
   public void setTextParagraphFootnotes(TextParagraph textParagraph, int[] footnotePos) {
     rwLock.writeLock().lock();
     try {
-      if (textParagraph.type != CURSOR_TYPE_UNKNOWN) {
+      if (textParagraph.type != CURSOR_TYPE_UNKNOWN && textParagraph.number >= 0) {
         footnotes.set(toParaMapping.get(textParagraph.type).get(textParagraph.number), footnotePos);
       }
     } finally {
@@ -1531,11 +1479,6 @@ public class DocumentCache implements Serializable {
       if (nTable != docCursor.getNumberOfAllTables()) {
         return false;
       }
-/*
-      if (nFrame != docCursor.getNumberOfAllFrames()) {
-        return false;
-      }
-*/
       if (nShape != docCursor.getNumberOfAllShapes()) {
         return false;
       }
@@ -1892,16 +1835,13 @@ public class DocumentCache implements Serializable {
     rwLock.readLock().lock();
     try {
       if (sortedTextIds == null) {
-//        MessageHandler.printToLogFile("DocumentCache:isActual: sortedTextIds == null: return -1"); 
         return -1;
       }
       for (int i = 0; i < sortedTextIds.size(); i++) {
         if (sortedTextIds.get(i) == sortedTextId) {
-//          MessageHandler.printToLogFile("DocumentCache:isActual: return " + i + " for sortedTextId " + sortedTextId); 
           return i;
         }
       }
-//      MessageHandler.printToLogFile("DocumentCache:isActual: sortedTextId " + sortedTextId + " not found: return -1"); 
       return -1;
     } finally {
       rwLock.readLock().unlock();
@@ -1915,12 +1855,8 @@ public class DocumentCache implements Serializable {
     rwLock.readLock().lock();
     try {
       if (isDirty || sortedTextIds == null || documentElementsCount == -1 || this.documentElementsCount != documentElementsCount) {
-//        MessageHandler.printToLogFile("DocumentCache:isActual: FALSE; isDirty: " + isDirty + 
-//            ", old documentElementsCount: " + this.documentElementsCount + ", new documentElementsCount: " + documentElementsCount + 
-//            ", sortedTextIds " + (sortedTextIds == null ? "==" : "!=") + " null"); 
         return false;
       }
-//      MessageHandler.printToLogFile("DocumentCache:isActual: TRUE"); 
       return true;
     } finally {
       rwLock.readLock().unlock();
@@ -1966,13 +1902,6 @@ public class DocumentCache implements Serializable {
       this.Country = locale.Country;
       this.Language = locale.Language;
       this.Variant = locale.Variant;
-    }
-
-    /**
-     * return the language as Locale
-     */
-    Locale toLocale() {
-      return new Locale(Language, Country, Variant);
     }
 
     /**

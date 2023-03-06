@@ -110,20 +110,33 @@ public class RussianChunker implements Chunker {
       // И.И. Иванов
       build("<regexCS=[А-ЯЁ]> <.> <regexCS=[А-ЯЁ]> <.> <posre='NN:Fam:.*'> ", NP, true),
       // verb+verb
-      build("<posre='VB:.*:.*' & !posre='NN:.*'>* " , VP),
+      build("<posre='VB:.*:.*' & !posre='NN:.*'>* " , VP, false),
+
       build("<если>", SBAR),  //
       build("<поэтому>", SBAR),  //
+      // noun phrase 
+      build("<posre='ADJ:Posit:.*:.*'> <posre='NN:(Anim|Inanim):.*' & !posre='NN:(Anim|Inanim):.*:(R|D|T|P)'> " , NP, true),
+     
+      build("<posre='ADJ:Posit:.*:.*'> <posre='NN:(Anim|Inanim):.*' & !posre='NN:(Anim|Inanim):.*:(R|D|T|P)'> <posre='NN:(Anim|Inanim):.*'> " , NP, true),
+      // adj -> participle phrase
+      build("<posre='ADJ:Posit:.*:.*'> <posre='NN:(Anim|Inanim):.*' & !posre='NN:(Anim|Inanim):.*:(Nom|V)'> <posre='NN:(Anim|Inanim):.*:(Nom|V)' & !posre='NN:(Anim|Inanim):.*:(R|D|T|P)'> " , ADJP, true),
+      
       //adverbial participle
       build("<posre='DPT:.*:.*' & !pos='PREP'> " , DPT),
       build("<posre='DPT:.*:.*' & !pos='PREP'> <posre='NN:.*:.*:(R|D|T|P)' > " , DPT, true),
       build("<posre='DPT:.*:.*' & !pos='PREP'> <posre='PREP'> <posre='NN:.*:.*:(R|D|T|P)' > " , DPT, true),
       //participle
       build("<posre='PT:.*:.*'> " , ADJP),
+
+      build("<posre='PT:.*:.*'> <pos='ADV' > " , ADJP, true),
+
       build("<posre='PT:.*:.*'> <posre='NN:.*:.*:(R|D|T|P)' > " , ADJP, true),
       build("<posre='PT:.*:.*'> <posre='PREP'> <posre='NN:.*:.*:(R|D|T|P|V)' > " , ADJP, true),
       build("<posre='PT:.*:.*'> <posre='PREP'> <posre='ADJ:.*:.*:(R|D|T|P|V)' > <posre='NN:.*:.*:(R|D|T|P|V)' > " , ADJP, true),
+      build("<posre='PT:.*:.*'> <posre='NN:(Anim|Inanim):.*' & !posre='NN:(Anim|Inanim):.*:(Nom|V)'> <posre='NN:(Anim|Inanim):.*:(Nom|V)' & !posre='NN:(Anim|Inanim):.*:(R|D|T|P)'> " , ADJP, true),      
+      build("<posre='PT:.*:.*'> <posre='PNN:.*' & !posre='PNN:.*:Nom:.*'> <posre='NN:(Anim|Inanim):.*:(Nom|V)' & !posre='NN:(Anim|Inanim):.*:(R|D|T|P)'> " , ADJP, true),
       //
-       build("<posre='PT:.*:.*'> <posre='ADJ:.*:.*' > " , ADJP, false),
+      build("<posre='PT:.*:.*'> <posre='ADJ:.*:.*' > " , ADJP, false),
       //
       build("<тов>", NP)  // simulate OpenNLP?!
   );
@@ -132,7 +145,9 @@ public class RussianChunker implements Chunker {
       // ===== plural and singular noun phrases, based on OpenNLP chunker output ===============
       // "Маша и Миша":
       build("<posre=NN:Name:.*> <и> <posre=NN:Name:.*>", NPP, true),
-      build("<posre=NN:Name:.*> <или> <posre=NN:Name:.*>", NPP, true)
+      build("<posre=NN:Name:.*> <или> <posre=NN:Name:.*>", NPP, true),
+      // не + VB
+      build("<не> <posre='VB:.*:.*' & !posre='NN:.*'>* " , VP, false)
   );
 
   private static RegularExpressionWithPhraseType build(String expr, PhraseType phraseType) {

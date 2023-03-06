@@ -1,4 +1,17 @@
 #separatorRegExp=[\t;]
+Albus Dumbledore;NPMSSP0
+sílex piròmac;NCMS000
+New York Post;NPMSO00
+tote bag;NCFS000
+tote bags;NCFP000
+Amin Maalouf;NPMSSP0
+Le Concert des Nations;NPMSO00
+Hespèrion XX;NPMSO00
+Hespèrion XXI;NPMSO00
+Air Canada;NPCSO00
+Los Angeles Times;NPMSO00
+Stan Lee;NPMSSP0
+Jean Austen;NPFSSP0
 Enid Blyton;NPFSSP0
 red flag;NCFS000
 red flags;NCFP000

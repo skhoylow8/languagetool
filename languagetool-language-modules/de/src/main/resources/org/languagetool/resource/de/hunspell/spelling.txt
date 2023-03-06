@@ -6757,7 +6757,7 @@ Skriptentwürfe/N
 Skulpturengiebel/NS
 Skulpturenzyklus
 SkyTrain
-Slam #eng
+Slam/S #eng
 slicen
 Slipanlage/N
 Slotaussparung
@@ -7980,6 +7980,8 @@ vorbohrtest
 Vorfahrin
 Vorfahrinnen
 vorfahrtsregelnd/A
+Vorfahrtsfehler
+Vorfahrtsstraße/N
 Vorfallstyp
 Vorfallstypen
 Vorgabedokument
@@ -8219,6 +8221,7 @@ Wirkungsfunktional/S
 wirkungsintentional/A
 wirkungsorientiert/A
 wirtschaftsinformatisch/A
+wirtschaftsrechtlich/A
 Wischfunktion
 Wochenplanarbeit
 Wohlfühlgastronomie
@@ -54850,7 +54853,7 @@ Ridgewood/S #name
 Solidaritätszuschlaggesetz
 Solidaritätszuschlaggesetzes
 hoch_bocken
-hochgebockt/A
+hochgebockt/P
 Pseudo-Offroader/SN
 not_operieren
 gewinnberechtigt/A
@@ -54934,9 +54937,428 @@ Zeitraffervideo/S
 Motivwunsch
 Motivwünsche/N
 erbgroßherzoglich/A
-ErbStRG #abk
-Ferranti #name
-Freespace #name #eng
-Fry #name
 erbkonstant/A
 erdhistorisch/A
+Zeitraffervideo/S
+präzisionsgelenkt/A
+Migränebeschwerden
+Migränebehandlung
+Migränebehandlungen
+Migräne
+Ergotamin/S
+herzbedingt/A
+abkommensrechtlich/A
+abkommensberechtigt/A
+Abkommensberechtigung
+Abkommensberechtigungen
+dichtsitzend/A
+notbedürftig/A
+sozialwichtig/A
+Sekretstau/S
+rein_graben
+Flimmerepithel/S
+lieferbereit/A
+lieferwillig/A
+lieferunwillig/A
+tierhaltend/A
+schweinehaltend/A
+hühnerhaltend/A
+kühehaltend/A
+Second-Hand-Laden/S
+Unüberprüfbarkeit
+Mediensprech
+If-Else-Block/S
+If-Else-Konstrukt/S
+If-Else-Konstruktes
+Try-Catch-Block/S
+Try-Catch-Konstrukt/S
+Try-Catch-Konstruktes
+Leopard-2-Panzer/SN
+Leopard-2-Kampfpanzer/SN
+Challenger-2-Panzer/SN
+Challenger-2-Kampfpanzer/SN
+schmerzlindernd/A
+ressentimentfrei/A
+medienjournalistisch/A
+teilenswert/A
+Transformationsgeschichte/N
+Multi-Purpose-App/S
+Paid-Content-Strategie/N
+margenstark/A
+margenschwach/A
+Normenklarheit
+Support
+Supportaufkommen/S
+Bizepstraining/S
+Trizepstraining/S
+voll_spammen
+Megaknall/S
+öffentl. #abk
+anwaltlich/A
+verbrauchsintensiv/A
+Jürgen Fitschen/S #name
+frostgeschützt/A
+Einhandsegeln/S
+Einhandsegler/SN
+Einhandseglerin
+Einhandseglerinnen
+medikamenteninduziert/A
+masketragend/A
+besterreichbar/A
+Best Ager/SN
+Best Agerin
+Best Agerinnen
+bestaussehend/A
+bestsituiert/A
+Slam Dunk/S
+Morawiecki/S #name
+schwankungsreich/A
+schwingungsreich/A
+schwankungsanfällig/A
+schwingungsanfällig/A
+besterreichbar/A
+bestverfügbar/A
+bestgekleidet/A
+bestbezahlt/A
+bestgepflegt/A
+Second Gentleman/S #eng
+Thibault/S #name
+Besteiger/SN
+Besteigerin
+Besteigerinnen
+schaffnerlos/A
+Durchsagezeit
+Durchsagezeiten
+bestangezogen/A
+Kremltruppe/N
+Kremlarmee/N
+Bellizist
+Bellizistin
+Bellizistinnen
+Bellizisten
+chipp
+chippe/N
+chippte/N
+chippt
+chippet
+chipptest
+chippest
+chippst
+São Tomé
+são-toméisch/A
+São Toméer/FS
+São-Toméer/FS
+Selbstbestäuber/SN
+traditionskritisch/A
+Thomas Wiecki/S #name
+Indefinitbegleiter/NS
+Antananarivo/S #name
+hebeberechtigt/A
+depotführend/A
+Cyberabwehr
+Verhinderer/SN
+evidenzfrei/A
+abschlagsfrei/A
+sprachgewaltig/A
+E-Mail/S
+PCtipp/S #name
+Whippet/S
+Ristretto
+Caffè Latte
+Caffè mocha
+Café au Lait
+Café Cortado
+kindschaftsrechtlich/A
+Kindschaftsrechtliche Praxis
+Sporenmessung
+Sporenmessungen
+Paraphyse/N
+Selm #name
+Südend #name
+Dammersfeldstr. #name
+Dammersfeldstraße #name
+skalierfähig/A
+schwallartig/A
+Einmaltücher/N
+Einmaltuch/S
+Typspezies
+Replikationszyklus
+Replikationszyklen
+Norwalk/S #name
+Genotypgruppe/N
+Sequenzänderung
+Sequenzänderungen
+Vorläufersubstanz
+Vorläufersubstanzen
+Zelltropismus
+wirtseigen/A
+nach_trainieren
+immunregulierend/A
+posttranskriptional/A
+prä-mRNA
+erschließungspflichtig/A
+Bruchteilsgemeinschaft
+Bruchteilsgemeinschaften
+East Palestine/S #name
+Ohio River/S #name
+Pittsburgher/SN
+Pittsburgherin
+Pittsburgherinnen
+Qualmwolke/N
+nach_trainieren
+nachtrainiert/P
+Angelrutenhalter/S
+Fliegenrutenserie/N
+Imbissbudenbetreiber_in
+Diversifizierungsgrad/S
+Diversifizierungsgrade/NS
+vorbei_lotsen
+Kraftwerksbeschäftigter
+Kraftwerksbeschäftigte/N
+Agrophotovoltaik
+Transformationsfonds
+Anpacker/S
+Zubehörliste/N
+Paraphimose/N
+Sudenburg/S #name
+Sudendorf/S #name
+Haufe Gruppe #name
+Haufe Verlag/S #name
+Klambt Verlag/S #name
+Niedrigenergiebereich/S
+Niedrigenergiebereiche/NS
+Nachfragebündelung
+Nachfragebündelungen
+Stoßfängerabdeckung
+Stoßfängerabdeckungen
+Hochvoltsystem/ES
+Registrierungsbrief/S
+Registrierungsbriefe/NS
+Maklerbetreuung
+Maklerbetreuungen
+Sozialisationsforschung
+Preiserhöhungsschreiben/S
+Ungehorsamkeit
+Wellnessanlage/N
+Safaris
+Motivationskiller/NS
+Qualzucht
+Umverfügung
+Umverfügungen
+Traditionsverlag/S
+Geschenkabo/S
+an_pingen
+Premiumsprache/N
+Deutsche Annington #name
+Deutschen Annington #name
+Eutendorf/S #name
+Oudenburg/S #name
+Surendorf/S #name
+an_punkten
+zwischen_speichern
+Oldenbourg #name
+besatzungsrechtlich/A
+Bettina Jarasch/S #name
+Mörderhexe/N
+Brokstedt/S #name
+Nachbehandlungsplan/S
+Nachbehandlungspläne/N
+Anastasiia/S #name
+Coaching/S
+Coachingprogramm/S
+Registrierungslink/S
+Aufsparrendämmung
+Aufsparrendämmungen
+Bonanza/S #name
+Coachingausbildung
+Coachingausbildungen
+Allparteilichkeit
+Allparteilichkeiten
+bahnend/A
+aufhältig/A
+Berufsmaturitätsarbeit
+Berufsmaturitätsarbeiten
+Brennerflamme/N
+Cassidy/S #name
+Modalwert/S
+Modalwerte/SN
+Teamzusammenarbeit
+Akutpsychiatrie/N
+Anfragetyp/S
+Anfragetypen
+Anrufloop/S
+Auslegeordnung
+Auslegeordnungen
+Beschnittzugabe/N
+Bewegungsbahnung
+Bewegungsbahnungen
+CinemaxX #name
+Paulusgemeinde/N
+Solldrehzahl
+Abhilfebescheid/S
+Abhilfebescheide/N
+narrenfrei/A
+Investigativredaktion
+Jerusalemrose/N
+Marienrose/N
+Bahnert/S #name
+Beziehungscoaching/S
+Innovationscoaching/S
+Karrierecoaching/S
+Laufcoaching/S
+Unterrichtscoaching/S
+Textcoaching/S
+Blomstedt/S #name
+Bohnanza/S #name
+Bokassa/S #name
+Bonaqa/S #name
+Bononia/S #name
+Borgstedt/S #name
+Brockstedt/S #name
+Broistedt/S #name
+Lengede/S #name
+Capdepera/S #name
+Cassady/S #name
+Cassedy/S #name
+Cronstedt/S #name
+Zystitis
+Einprozenthürde/N
+GasTerra/S #name
+Gipfelcaldera
+Gipfelcalderen
+Calderen
+Registrierungsland/S
+Registrierungslandes
+Registrierungsländer/N
+Ortenburg #name
+Nachbehandlungsphase/N
+Vorbehandlungsphase/N
+Präsentationscoaching/S
+Personalitycoaching/S
+Gremiensitz
+Gremiensitze/NS
+inklusivere
+inklusiveres
+inklusiverer
+inklusiveren
+inklusiverem
+inklusivste
+inklusivsten
+inklusivstem
+inklusivster
+inklusivstes
+Talentzugang/S
+Talentzugänge/N
+Kalkschutzfilter/SN
+Disbalance/N
+Feindesperson
+Feindespersonen
+Essenzialismus
+Beißschiene/N
+Aufbissschiene/N
+Overachiever/SN
+Overachieverin
+Overachieverinnen
+Overperformer/SN
+Overperformerin
+Overperformerinnen
+Underachiever/SN
+Underachieverin
+Underachieverinnen
+Underperformer/SN
+Underperformerin
+Underperformerinnen
+Flunkyball/S
+Mixed-Team/S
+Maxi-Cosi/S
+etatmäßig/A
+Fehmarnbeltquerung
+Fehmarn-Belt-Querung
+Fehmarnbelttunnel/S
+Fehmarn-Belt-Tunnel/S
+Verfügbarkeitsdaten
+Meetinglocation/S
+Ku’damm/S
+Offsite Meeting/S
+Mobilitätsservice/S
+Unique Selling Proposition/S #eng
+Martial-Arts-Film/S
+Martial-Arts-Filme/N
+Social Bookmark/S
+Social Bookmarking/S
+Bookmarking/S #eng
+rüber_wachsen #ugs
+herüber_wachsen #ugs
+hinüber_wachsen #ugs
+Börsenbriefing/S
+softwaregetrieben/A
+hardwaregetrieben/A
+Cookstraße
+neuseeländisch/A
+tasmanisch/A
+nigerianisch/A
+taiwanesisch/A
+thailändisch/A
+vietnamesisch/A
+vorwurfsfrei/A
+pädokriminell/A
+Pädokriminalität
+Einhandsegeln/S
+Yachtversicherung
+Yachtversicherungen
+McArthur/S #name
+MacArthur/S #name
+Trimaran/S
+Trimarane/N
+Transatlantikregatta
+Transatlantikregatten
+Newport/S #name
+Seats and Sofas #name
+Seats & Sofas #name
+schwurbelig/A
+Ausdruckverbesserung
+Ausdruckverbesserungen
+gestelzt/P
+Skalierungshypothese/N
+transformatorbasiert/A
+Umformulierungskunst
+Umformulierungskünste/N
+Trapattoni/S #name
+Verbesserungsfunktion
+Verbesserungsfunktionen
+Paraphrasierungstool/S
+stolperträchtig/A
+Premiumautobauer/SN
+Togostraße #name
+crème
+doppio/S
+mélange
+Autoscaling/S #eng
+Māori
+gewerbesteuerrechtlich/A
+Mieterhöhungserklärung
+Mieterhöhungserklärungen
+SEPA-Lastschriftmandat
+SEPA-Lastschriftmandates
+SEPA-Lastschriftmandats
+Hüftgold/S #name
+Ikke Hüftgold/S #name
+programmplanerisch/A
+Bode-Museum/S #name
+conversionoptimiert/A
+konversionsoptimiert/A
+wertoptimiert/A
+kostenoptimiert/A
+energieoptimiert/A
+geräuschoptimiert/A
+gewichtsoptimiert/A
+strömungsoptimiert/A
+Burkhart/S #name
+United Tribun/S #name
+Jobhopping/S #eng
+Job-Hopping/S #eng
+Satudarah/S #name
+Schlotterbeck/S #name
+Matched Audience/S #eng
+Hells Angel/S
+Mélanie/S #name

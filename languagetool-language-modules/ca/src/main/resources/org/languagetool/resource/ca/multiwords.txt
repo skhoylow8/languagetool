@@ -1,5 +1,32 @@
 #Catalan multiwords file used for chunking
 #separatorRegExp=[\t;]
+sala vip;NPFS000
+sales vip;NPFP000
+Regió 7;NPMSO00
+Albus Dumbledore;NPMSSP0
+b/n;AQ0CN0
+B/N;AQ0CN0
+alguna vegada;LOC_ADV
+New York Post;NPMSO00
+Science Bits;NPCNO00
+Tirant lo Blanc;NPMSSP0
+Lo Somni;NPMSO00
+Lo Crestià;NPMSO00
+Lo Cristià;NPMSO00
+Lo Catalanisme;NPMSO00
+ora et labora;NCMS000
+Ora et Labora;NCMS000
+vall d'Ora;NPFSG00
+Amin Maalouf;NPMSSP0
+Le Concert des Nations;NPMSO00
+Hespèrion XX;NPMSO00
+Hespèrion XXI;NPMSO00
+Air Canada;NPCSO00
+Llibre d'amic e amat;NPMSO00
+Curial e Güelfa;NPMSO00
+Los Angeles Times;NPMSO00
+Stan Lee;NPMSSP0
+Jean Austen;NPFSSP0
 Lazarillo de Tormes;NPMSSP0
 au fènix;NCFS000
 Enid Blyton;NPFSSP0
@@ -1855,7 +1882,6 @@ de mancomú	LOC_ADV
 de manera que	LOC_CONJ
 de manual	LOC_ADJ
 de matí	LOC_ADV
-de mentida	LOC_ADJ
 de mica en mica	LOC_ADV
 de mitjan	LOC_PREP
 de més a més	LOC_ADV

@@ -1554,7 +1554,9 @@ DoorDash
 Disneyland
 Euler Hermes
 Bristol Myers
+Bristol-Myers
 Bristol Myers Squibb
+Bristol-Myers Squibb
 Biggie Smalls
 Tupac
 2Pac
@@ -5034,3 +5036,110 @@ Lloyd James Austin
 Lloyd J. Austin
 Mark Milley
 Max Ernst
+Tom Zhu
+RWE Offshore Wind
+Jeff Zients
+Chris Hipkins
+BRICS
+Jean Austen
+Ron Perlman
+Grand Seiko
+The Last of Us
+Societas Europaea
+STOXX Europe
+Enzo Fernández
+Linsey Davis
+Mike Sievert
+Marcel Sabitzer
+Segunda División
+Thibaut Courtois
+Manuel Pellegrini
+Alberto Fernández
+João Cancelo
+Rúben Dias
+João Félix
+Shaquille O’Neal
+Sándor Márai
+Shaq O’Neal
+Shaquille O'Neal
+Shaq O'Neal
+Costa Concordia
+Steffen Hebestreit
+Amin Maalouf
+Tyre Nichols
+Raquel Welch
+Jane Fonda
+Norfolk Southern Railways
+Norfolk Southern
+East Palestine
+Inflation Reduction Act
+Daniel Ek
+UberEats
+Solana
+Capterra
+Markus Eisenbichler
+Karl Geiger
+Dayot Upamecano
+Seymour Hersh
+Piotr Zieliński
+Victor Osimhen
+Linux Mint
+Jordan Peterson
+Tommy Fury
+Heidelberg Materials
+Victoria Nuland
+Geraldo Alckmin
+Delcídio do Amaral
+Jair Bolsonaro
+José Eduardo Cardozo
+Cláudio Castro
+Fernando Collor de Mello
+Eduardo Cunha
+Luiz Inácio Lula da Silva
+Fernando Henrique Cardoso
+Itamar Franco
+Marcelo Freixo
+Ciro Gomes
+Joao Goulart
+Ulysses Guimaraes
+Waldir Maranhao
+Aécio Neves
+Tancredo Neves
+Antonio Palocci
+Ibaneis Rocha
+Dilma Rousseff
+José Sarney
+José Serra
+Marina Silva
+Fabiano Silveira
+Simone Tebet
+Michel Temer
+Geddel Vieira
+Adani Group
+Maxi-Cosi
+Molson Coors
+Empire State Building
+Ada Colau
+Xavier Trias
+Grant Thornton
+Bernstein Research
+Sigur Rós
+Bella Ramsey
+Pedro Pascal
+Frogmore Cottage
+Frogmore House
+Meghan Trainor
+Owen Hargreaves
+Giovanni Trapattoni
+DeepL Write
+Mediobanca
+Hilary Duff
+Hilary Swank
+gRPC
+Ikke Hüftgold
+Tate Modern
+Tate Gallery
+William Turner
+Grand Hyatt
+Satudarah MC
+Albus Dumbledore

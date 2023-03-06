@@ -223,6 +223,7 @@ public class Spanish extends Language implements AutoCloseable {
       case "ES_SIMPLE_REPLACE": return 30; // greater than typography rules
       case "ETCETERA": return 30; // greater than other typography rules
       case "P_EJ": return 30; // greater than other typography rules
+      case "SE_CREO2": return 25; 
       //case "ESPACIO_DESPUES_DE_PUNTO": return 25; // greater than other typography rules
       case "AGREEMENT_ADJ_NOUN_AREA": return 30; // greater than AGREEMENT_DET_NOUN
       case "PRONOMBRE_SIN_VERBO": return 25; // inside CONFUSIONS, but less than other rules ?
@@ -238,7 +239,8 @@ public class Spanish extends Language implements AutoCloseable {
       case "SI_AFIRMACION": return 10; // less than DIACRITICS
       case "TE_TILDE2": return 10; // less than PRONOMBRE_SIN_VERBO
       case "SEPARADO": return 1;
-      case "ES_SPLIT_WORDS": return -10; 
+      case "ES_SPLIT_WORDS": return -10;
+      case "U_NO": return -10;
       case "E_EL": return -10;
       case "EL_TILDE": return -10;
       case "SINGLE_CHARACTER": return -15; // less than ES_SPLIT_WORDS

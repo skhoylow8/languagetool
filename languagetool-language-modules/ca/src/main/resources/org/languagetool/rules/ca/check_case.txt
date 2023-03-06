@@ -439,6 +439,8 @@ corredor del Mediterrani
 mar Mediterrani
 mar Mediterrània
 deute públic
+mercat de deute públic anotat
+mercat primari de deute públic
 taxa de natalitat
 taxa de mortalitat
 taxa de fecunditat
@@ -575,3 +577,31 @@ Le Mans
 Mar Menor
 Consell de Ministres
 Editorial Afers
+arròs Parellada
+Prat de Llobregat
+Prat de Cadí
+Prat de la Riba
+Prat de Comte
+Tirant lo Blanc
+Tirant lo Blanch
+Lo Cristià
+Lo Crestià
+Lo somni
+Primo de Rivera
+ovni
+ovnis
+baix imperi
+imperi asteca
+imperi britànic
+imperi carolingi
+imperi de Napoleó
+imperi del Sol Naixent
+imperi d'Orient
+imperi egipci
+imperi inca
+imperi otomà
+imperi romà
+imperi rus
+Platja d'Aro
+Castell-Platja d'Aro
+Castell i Platja d'Aro

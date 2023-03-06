@@ -326,7 +326,6 @@ Minas Gerais	NNP
 Mato Grosso do Sul	NNP
 Rio Grande do Sul	NNP
 Rio Grande do Norte	NNP
-Espírito Santo	NNP
 Distrito Federal	NNP
 Belo Horizonte	NNP
 Porto Alegre	NNP
@@ -1995,7 +1994,7 @@ Brevard County	NNP
 Brian Eno	NNP
 Brigitte Bardot	NNP
 Bristol Myers	NNP
-Bristol Myers Squibb	NNP
+Bristol-Myers Squibb	NNP
 British Airways	NNP
 Britney Spears	NNP
 Brokeback Mountain	NNP
@@ -6326,3 +6325,68 @@ Sergio Ramos	NNP
 LinkedIn Sales Navigator	NNP
 Mark Milley	NNP
 La Pedrera	NNP
+Tom Zhu	NNP
+RWE Offshore Wind	NNP
+Petróleo Brasileiro	NNP
+Chris Hipkins	NNP
+Ron Perlman	NNP
+Grand Seiko	NNP
+Societas Europaea	NNP
+STOXX Europe	NNP
+Linsey Davis	NNP
+Mike Sievert	NNP
+Marcel Sabitzer	NNP
+Segunda División	NNP
+Thibaut Courtois	NNP
+Manuel Pellegrini	NNP
+Alberto Fernández	NNP
+João Cancelo	NNP
+Rúben Dias	NNP
+João Félix	NNP
+Shaquille O’Neal	NNP
+Shaq O’Neal	NNP
+Shaquille O'Neal	NNP
+Shaq O'Neal	NNP
+Costa Concordia	NNP
+Sándor Márai	NNP
+Steffen Hebestreit	NNP
+Tyre Nichols	NNP
+An Lushan	NNP
+Raquel Welch	NNP
+Jane Fonda	NNP
+Norfolk Southern	NNP
+Norfolk Southern Railways	NNP
+Canterville Ghost	NNP
+Markus Eisenbichler	NNP
+Karl Geiger	NNP
+Dayot Upamecano	NNP
+Seymour Hersh	NNP
+Piotr Zieliński	NNP
+Victor Osimhen	NNP
+Linux Mint	NNP
+Jordan Peterson	NNP
+Tommy Fury	NNP
+Heidelberg Materials	NNP
+Victoria Nuland	NNP
+Adani Group	NNP
+Basler Zeitung	NNP
+Molson Coors	NNP
+Grant Thornton	NNP
+Bernstein Research	NNP
+Sigur Rós	NNP
+Bella Ramsey	NNP
+Pedro Pascal	NNP
+Frogmore Cottage	NNP
+Frogmore House	NNP
+Meghan Trainor	NNP
+Giovanni Trapattoni	NNP
+Hilary Duff	NNP
+Hilary Swank	NNP
+Luiz Inácio Lula da Silva	NNP
+Tate Modern	NNP
+Tate Gallery	NNP
+Ikke Hüftgold	NNP
+William Turner	NNP
+Grand Hyatt	NNP
+Satudarah MC	NNP
+Ig Nobel Prize	NNP

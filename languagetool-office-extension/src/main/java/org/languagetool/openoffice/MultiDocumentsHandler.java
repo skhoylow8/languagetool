@@ -393,10 +393,6 @@ public class MultiDocumentsHandler {
       cfgDialog.close();
       cfgDialog = null;
     }
-//    if (aboutDialog != null) {
-//      aboutDialog.close();
-//      aboutDialog = null;
-//    }
   }
   
   /**
@@ -497,29 +493,43 @@ public class MultiDocumentsHandler {
       langCode = OfficeTools.localeToString(locale);
     }
     Map<String, String> disabledRulesMap = new HashMap<>();
-    List<Rule> allRules = lt.getAllRules();
-    for (String disabledRule : getDisabledRules(langCode)) {
-      String ruleDesc = null;
-      for (Rule rule : allRules) {
-        if (disabledRule.equals(rule.getId())) {
-          ruleDesc = rule.getDescription();
-          break;
+    if (langCode != null && lt != null && config != null) {
+      List<Rule> allRules = lt.getAllRules();
+      List<String> disabledRules = new ArrayList<String>(getDisabledRules(langCode));
+      for (int i = disabledRules.size() - 1; i >= 0; i--) {
+        String disabledRule = disabledRules.get(i);
+        String ruleDesc = null;
+        for (Rule rule : allRules) {
+          if (disabledRule.equals(rule.getId())) {
+            if (!rule.isDefaultOff() || rule.isOfficeDefaultOn()) {
+              ruleDesc = rule.getDescription();
+            } else {
+              removeDisabledRule(langCode, disabledRule);
+            }
+            break;
+          }
+        }
+        if (ruleDesc != null) {
+          disabledRulesMap.put(disabledRule, ruleDesc);
         }
       }
-      if (ruleDesc != null) {
-        disabledRulesMap.put(disabledRule, ruleDesc);
-      }
-    }
-    for (String disabledRule : config.getDisabledRuleIds()) {
-      String ruleDesc = null;
-      for (Rule rule : allRules) {
-        if (disabledRule.equals(rule.getId())) {
-          ruleDesc = rule.getDescription();
-          break;
+      disabledRules = new ArrayList<String>(config.getDisabledRuleIds());
+      for (int i = disabledRules.size() - 1; i >= 0; i--) {
+        String disabledRule = disabledRules.get(i);
+        String ruleDesc = null;
+        for (Rule rule : allRules) {
+          if (disabledRule.equals(rule.getId())) {
+            if (!rule.isDefaultOff() || rule.isOfficeDefaultOn()) {
+              ruleDesc = rule.getDescription();
+            } else {
+              config.removeDisabledRuleId(disabledRule);
+            }
+            break;
+          }
         }
-      }
-      if (ruleDesc != null) {
-        disabledRulesMap.put(disabledRule, ruleDesc);
+        if (ruleDesc != null) {
+          disabledRulesMap.put(disabledRule, ruleDesc);
+        }
       }
     }
     return disabledRulesMap;
@@ -1088,7 +1098,6 @@ public class MultiDocumentsHandler {
    *  return true if toggle was done 
    */
   public boolean toggleNoBackgroundCheck() throws IOException {
-//    MessageHandler.printToLogFile("MultiDocumentsHandler: setNoBackgroundCheck: noCheck = " + noCheck + ", noBackgroundCheck = " + noBackgroundCheck);
     if (docLanguage == null) {
       docLanguage = getLanguage();
     }
@@ -1171,6 +1180,18 @@ public class MultiDocumentsHandler {
     for (SingleDocument document : documents) {
       if (menuDocId.equals(document.getDocID())) {
         return document.ignoreOnce();
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * Call method ignorePermanent for concerned document 
+   */
+  public String ignorePermanent() {
+    for (SingleDocument document : documents) {
+      if (menuDocId.equals(document.getDocID())) {
+        return document.ignorePermanent();
       }
     }
     return null;
@@ -1501,6 +1522,9 @@ public class MultiDocumentsHandler {
           aboutDialog.close();
           aboutDialog = null;
         }
+        if (!isJavaLookAndFeelSet()) {
+          setJavaLookAndFeel();
+        }
         AboutDialogThread aboutThread = new AboutDialogThread(messages, xContext);
         aboutThread.start();
       } else if ("toggleNoBackgroundCheck".equals(sEvent)) {
@@ -1509,6 +1533,8 @@ public class MultiDocumentsHandler {
         }
       } else if ("ignoreOnce".equals(sEvent)) {
         ignoreOnce();
+      } else if ("ignorePermanent".equals(sEvent)) {
+        ignorePermanent();
       } else if ("deactivateRule".equals(sEvent)) {
         deactivateRule();
       } else if (sEvent.startsWith("activateRule_")) {
@@ -1695,7 +1721,6 @@ public class MultiDocumentsHandler {
         lt = initLanguageTool(true);
         initCheck(lt);
         initDocuments(true);
-//        setJavaLookAndFeel();
         return true;
       } else {
         resetCheck();
@@ -1865,7 +1890,6 @@ public class MultiDocumentsHandler {
    */
   public void runShapeCheck (boolean hasShapes, int where) {
     try {
-//      MessageHandler.printToLogFile("MultiDocumentsHandler: runShapeCheck: hasShapes: " + hasShapes + " from " + where);
       if (hasShapes && (shapeChangeCheck == null || !shapeChangeCheck.isRunning())) {
         MessageHandler.printToLogFile("MultiDocumentsHandler: runShapeCheck: start");
         shapeChangeCheck = new ShapeChangeCheck();

@@ -306,6 +306,7 @@ public class English extends Language implements AutoCloseable {
       case "READ_ONLY_ACCESS_HYPHEN":   return 2;   // higher priority than agreement rules
       case "MAKE_OR_BREAK_HYPHEN":   return 2;   // higher priority than agreement rules
       case "LINKED_IN":                 return 2;   // higher prio than agreement rules
+      case "I_A_M":                     return 1;   // higher prio than EN_A_VS_AN
       case "ACCESS_EXCESS":             return 1;   // higher prio than A_UNCOUNTABLE
       case "PRP_ABLE_TO":               return 1;   // higher prio than AI_HYDRA_LEO_CP_YOU.*
       case "WEE_WE":                    return 1;   // higher prio than INTERJECTIONS_PUNCTUATION
@@ -360,9 +361,10 @@ public class English extends Language implements AutoCloseable {
       case "QUIET_QUITE":               return 1;   // higher prio than A_QUITE_WHILE
       case "A_OK":                      return 1;   // prefer over A_AN
       case "I_A":                       return 1;   // higher prio than I_IF
+      case "NO_GOOD":                   return 1;   // higher prio than I_IF
+      case "PRP_NO_VB":                 return 1;   // higher prio than I_IF
       case "GOT_GO":                    return 1;   // higher prio than MD_BASEFORM
       case "THERE_FORE":                return 1;   // higher prio than FORE_FOR
-      case "PRP_NO_VB":                 return 1;   // higher prio than I_IF
       case "FOLLOW_UP":                 return 1;   // higher prio than MANY_NN
       case "IT_SOMETHING":              return 1;   // higher prio than IF_YOU_ANY and IT_THE_PRP
       case "NO_KNOW":                   return 1;   // higher prio than DOUBLE_NEGATIVE
@@ -508,7 +510,7 @@ public class English extends Language implements AutoCloseable {
       case "SUPERLATIVE_THAN":          return -1;  // prefer other more specific rules
       case "UNLIKELY_OPENING_PUNCTUATION": return -1;  // prefer other more specific rules
       case "MD_DT_JJ":                  return -1;  // prefer other more specific rules
-      case "CC_PRP_ARTICLE":            return -1;  // prefer other more specific rules
+      case "I_IF":                      return -1;  // prefer other more specific rules
       case "NOUNPHRASE_VB_RB_DT":       return -1;  // prefer other more specific rules
       case "SENT_START_NN_NN_VB":       return -1;  // prefer other more specific rules
       case "VB_A_JJ_NNS":               return -1;  // prefer other more specific rules (e.g. A_NNS)
@@ -577,6 +579,7 @@ public class English extends Language implements AutoCloseable {
       case "PRP_NO_ADVERB_VERB":        return -15;  // prefer other more specific rules (e.g. PRP_VBG, IT_ITS, ...)
       case "MISSING_TO_BETWEEN_BE_AND_VB": return -15; // prefer AI and comma rules
       case "HAVE_TO_NOTVB":             return -15; // prefer AI and comma rules
+      case "CC_PRP_ARTICLE":            return -15;  // prefer other more specific rules
       case "BE_MD":                     return -20;  // prefer other more specific rules (e.g. BEEN_PART_AGREEMENT, HYDRA_LEO)
       case "POSSESSIVE_APOSTROPHE":     return -10;  // prefer over AI_HYDRA_LEO_APOSTROPHE_S_XS (again, temporarily)
       case "CONFUSION_RULE":            return -20;
@@ -626,7 +629,7 @@ public class English extends Language implements AutoCloseable {
       }
       return -11;
     }
-    if (id.startsWith("AI_EN_G_")) { // prefer more specific rules (also speller)
+    if (id.startsWith("AI_EN_LECTOR")) { // prefer more specific rules (also speller)
       return -21;
     }
     if (id.matches("EN_FOR_[A-Z]+_SPEAKERS_FALSE_FRIENDS.*")) {

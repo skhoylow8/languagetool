@@ -2719,6 +2719,28 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                             <example>Pokład był zatłoczony ludźmi, śród których znajdowali się również Marcin i Agnieszka.</example>
                         </rule>
 				</rulegroup>
+            <rule id="PREP_KTORY_COMMA" name="„w którym, robimy” (w którym robimy)">
+                <antipattern>
+                    <marker>
+                        <token regexp="yes" inflected='yes'>który|jaki</token>
+                        <token skip="-1">,</token>
+                    </marker>
+                    <token>,</token>
+                    <token postag="verb:.*(sg|pl).*|verb:imps.*|pcon:imperf.*|pant:perf.*" postag_regexp="yes"/>
+                </antipattern>
+                <pattern>
+                    <unify><feature id="case"></feature>
+                    <token postag='prep.*' postag_regexp='yes'></token>
+                    <token regexp="yes" inflected='yes'>który|jaki</token>
+                    </unify>
+                    <token>,</token>
+                </pattern>
+                <message>Prawdopodobnie błąd interpunkcyjny. Powinno być: <suggestion><match no="1"/> <match no="2"/></suggestion>.</message>
+                <short>Błąd interpunkcyjny</short>
+                <example correction='w którym'>Kuchnia to pomieszczenie <marker>w którym,</marker> przygotowujemy i spożywamy posiłki.</example>
+                <example>Kuchnia to pomieszczenie, w którym przygotowujemy i spożywamy posiłki.</example>
+                <example>Kto wie, czy nie było to następstwo wieloletniej i bolesnej choroby nóg, na którą, zgodnie z relacją Galla Anonima, cierpiał władca.</example>
+            </rule>
                 <rule id="BRAK_PRZECINKA_PRZED_O_TYLE" name="Brak przecinka przed „o tyle”">
                     <pattern>
                         <token>o</token>
@@ -8507,7 +8529,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
           <token inflected="yes" regexp="yes">(?:nie)?(?:znany|obojętny|przeciwny|potrzebny|równy|wdzięczny|wierny|obcy|drogi|zbędny|rad|wstrętny|straszny|życzliwy)|(?:winny|wiadomy|właściwy|bliski|podległy|podszyć|wydawać)</token>
         </antipattern>
         <antipattern> <!-- rzeczowniki wymagające dopełniacza -->
-          <token inflected="yes" regexp="yes">grupa|pozycja|strata|funkcja|towarzystwo|wrażenie|miano|nazwa|treść|obraz|typ|rodzaj|brak|większość|pół|grono|mnóstwo|masa|lista|poziom|postać|powód|przyczyna|skutek|szereg|para|połowa|rola|tłum|liczba|tysiąc|milion|kolejka</token>
+          <token inflected="yes" regexp="yes">grupa|pozycja|strata|fala|funkcja|towarzystwo|wrażenie|miano|nazwa|treść|obraz|typ|rodzaj|brak|większość|pół|grono|mnóstwo|masa|lista|poziom|postać|powód|przyczyna|skutek|szereg|para|połowa|rola|tłum|liczba|tysiąc|milion|kolejka</token>
           <token postag="(adj|ppas|pact|subst).*gen.*" postag_regexp="yes"/>        
         </antipattern>
         <antipattern> <!-- przymiotniki wymagające „w” + locativus -->
@@ -8718,8 +8740,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
       <example>Odpłacił napastnikowi świetną satyrą w drugiej części swego Don Kichota.</example>
       <example>Ciało się wasze potężniejszym czyni.</example>
       <example>Buchnął gwar potężny, podobny do huku bijących o skały, rozszalałych fal morskich.</example>
-		</rule>
-		  <rulegroup id="DWA_LUB_WIECEJ" name="„dwa lub więcej” (co najmniej dwa)">
+      <example>To była druga fala odwiedzających.</example>
+      </rule>
+
+      <rulegroup id="DWA_LUB_WIECEJ" name="„dwa lub więcej” (co najmniej dwa)">
       <rule>
         <pattern>
           <token postag="prep:gen.*|&lt;/PREP:GEN&gt;" postag_regexp="yes"></token>
@@ -17368,6 +17392,73 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                   <example>Najwięcej aborcji wykonano w roku 1962 – 272 000.</example>
                 </rule>
             </rulegroup>
+            <rule id="UCZYNIC_MOZLIWYM_UMOZLIWIC" name="„Uczynić możliwym” (umożliwić)">
+                <pattern>
+                    <marker>
+                        <token inflected='yes'>uczynić</token>
+                        <token regexp='yes'>(nie)?możliw(ym|ą)</token>
+                    </marker>
+                    <token><exception regexp='yes'>(subst|ger):sg:inst.*</exception></token>
+                </pattern>
+                <message>Rozwlekły styl. Lepiej: <suggestion>u<match no="2" regexp_match="^(nie)?.*$" regexp_replace="$1"></match><match no="1" regexp_match="uczyn" regexp_replace="możliw"/></suggestion>.</message>
+                <short>Rozwlekłość</short>
+                <example correction='umożliwiło'>Uwolnienie mas od pracy, spowodowane poszerzeniem sfery czasu wolnego, <marker>uczyniło możliwym</marker> ich udział w kulturze.</example>
+                <example>Uwolnienie mas od pracy, spowodowane poszerzeniem sfery czasu wolnego, umożliwiło ich udział w kulturze.</example>
+                <example correction="uniemożliwi">Na komputerze w domu powinniśmy mieć natomiast zainstalowany skuteczny program antywirusowy, który <marker>uczyni niemożliwym</marker> zainstalowanie na naszym komputerze programów szpiegowskich.</example>
+            </rule>
+            <rule id="UCZYNIC_LATWIEJSZYM_ULATWIC" name="„Uczynić łatwiejszym” (ułatwić)">
+                <pattern>
+                    <marker>
+                        <token inflected='yes'>uczynić</token>
+                        <token regexp='yes'>łatwiejsz(ym|ą)</token>
+                    </marker>
+                    <token><exception regexp='yes'>(subst|ger):sg:inst.*</exception></token>
+                </pattern>
+                <message>Rozwlekły styl. Lepiej: <suggestion><match no="1" regexp_match="czyn" regexp_replace="łatw"/></suggestion>.</message>
+                <short>Rozwlekłość</short>
+                <example correction='ułatwić'>Nasza aplikacja ma <marker>uczynić  łatwiejszym</marker> organizację czasu, bez rozbudowanych ponad miarę opcji.</example>
+                <example>Nasza aplikacja ma ułatwić organizację czasu, bez rozbudowanych ponad miarę opcji.</example>
+            </rule>
+            <rule id="UCZYNIC_SZCZESLIWYM_USZCZESLIWIC" name="„Uczynić szczęśliwym” (uszczęśliwić)">
+                <pattern>
+                    <marker>
+                        <token inflected='yes'>uczynić</token>
+                        <token regexp='yes'>szczęśliw(ym|ą)</token>
+                    </marker>
+                    <token><exception regexp='yes'>(subst|ger):sg:inst.*</exception></token>
+                </pattern>
+                <message>Rozwlekły styl. Lepiej: <suggestion><match no="1" regexp_match="czyn" regexp_replace="szczęśliw"/></suggestion>.</message>
+                <short>Rozwlekłość</short>
+                <example correction='uszczęśliwiło'>Ale jakże mnie to <marker>uczyniło szczęśliwym</marker>!</example>
+                <example>Ale jakże mnie to uszczęśliwiło!</example>
+            </rule>
+            <rule id="UCZYNIC_SPOJNYM_USPOJNIC" name="„Uczynić spójnym” (uspójnić)">
+                <pattern>
+                    <marker>
+                        <token inflected='yes'>uczynić</token>
+                        <token regexp='yes'>spójn(ym|ą)</token>
+                    </marker>
+                    <token><exception regexp='yes'>(subst|ger):sg:inst.*</exception></token>
+                </pattern>
+                <message>Rozwlekły styl. Lepiej: <suggestion><match no="1" regexp_match="czy" regexp_replace="spój"/></suggestion>.</message>
+                <short>Rozwlekłość</short>
+                <example correction='uspójnić'>Jakie teksty Pisma Świętego trzeba ocenzurować, by tę koncepcję <marker>uczynić spójną</marker>?</example>
+                <example>Jakie teksty Pisma Świętego trzeba ocenzurować, by tę koncepcję uspójnić?</example>
+            </rule>
+            <rule id="POMIMO_TEGO_ZE_MIMO_ZE" name="„Pomimo tego, że” (Mimo że)" tags="picky">
+            <pattern>
+                <marker>
+                    <token>pomimo</token>
+                    <token skip='1'>tego<exception regexp='yes' negate='yes' scope='next'>,|że|iż</exception></token>
+                    <token regexp='yes'>że|iż</token>
+                </marker>
+            </pattern>
+            <message>Rozwlekły styl. Lepiej: <suggestion>mimo że</suggestion>.</message>
+            <short>Rozwlekłość</short>
+            <example correction='mimo że'>Nasze Dwa Serca są złączone , <marker>pomimo tego, że</marker> świat argumentuje i zaprzecza tej Prawdzie.</example>
+            <example correction='mimo że'>Nasze Dwa Serca są złączone , <marker>pomimo tego że</marker> świat argumentuje i zaprzecza tej Prawdzie.</example>
+            <example>Nasze Dwa Serca są złączone, mimo że świat argumentuje i zaprzecza tej Prawdzie.</example>
+        </rule>
             <rulegroup id="ZBEDNY_MIESIAC" name="Zbędna nazwa miesiąca w zakresie dat">
             <rule>
             <pattern>
@@ -19176,6 +19267,23 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             </rulegroup>
 		</category>
 		<category id="SPELLING" name="Błędy ortograficzne" type="misspelling">
+            <rule id="LEPIEJ_NISZ_LEPIEJ_NIZ" name="„Lepiej nisz” (Lepiej niż)">
+                <antipattern>
+                    <token postag="adj:pl:gen:.*f.*" postag_regexp="yes"/>
+                    <token>nisz</token>
+                </antipattern>
+                <pattern>
+                    <token postag='ad[vj].*:com.*' postag_regexp='yes'></token>
+                    <marker>
+                        <token>nisz</token>
+                    </marker>
+                </pattern>
+                <message>Prawdopodobnie błąd ortograficzny. Powinno być: <suggestion>niż</suggestion>.</message>
+                <short>Błąd ortograficzny</short>
+                <example correction='niż'>Usterka polega na tym, że tylne głośniki grają dużo ciszej <marker>nisz</marker> przednie.</example>
+                <example>Usterka polega na tym, że tylne głośniki grają dużo ciszej niż przednie.</example>
+                <example>Nie powinniśmy się godzić na spychanie bardów do coraz ciaśniejszych nisz...</example>
+            </rule>
             <rulegroup id="POLNA_DRUZKA_POLNA_DROZKA" name="„Polna drużka” (polna dróżka)">
                 <rule>
                 <pattern>
@@ -23909,6 +24017,37 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 				</rule>
 		</category>
     <category id="TYPOS" name="Prawdopodobne literówki" type="misspelling">
+        <rulegroup id="ZMIANIE_PODLEJA_ZMIANIE_PODLEGAJA" name="„Zmianie podleją” (Zmianie podlegają)">
+        <rule>
+            <pattern>
+                <token postag='(subst|ger|adj|ppron3).*dat.*' postag_regexp='yes'>
+                    <exception postag=".*inst.*" postag_regexp="yes"/>
+                </token>
+                <marker>
+                    <token>podleją</token>
+                </marker>
+            </pattern>
+            <message>Prawdopodobnie literówka. Powinno być: <suggestion>podlegają</suggestion>.</message>
+            <short>Literówka</short>
+            <example correction='podlegają'>Zmianie <marker>podleją</marker> zadania związane ze sprawdzaniem stanu technicznego pojazdu, ruszaniem z miejsca i jazdą pasem ruchu do przodu i tyłu.</example>
+            <example>Zmianie podlegają zadania związane ze sprawdzaniem stanu technicznego pojazdu, ruszaniem z miejsca i jazdą pasem ruchu do przodu i tyłu.</example>
+            <example correction='podlegają'>Temu <marker>podleją</marker> też obecnie istniejące regulacje.</example>
+        </rule>
+        <rule>
+            <pattern>
+                <marker>
+                    <token>podleją</token>
+                </marker>
+                <token postag='(subst|ger|adj|ppron3).*dat.*' postag_regexp='yes'>
+                    <exception postag=".*inst.*" postag_regexp="yes"/>
+                </token>
+            </pattern>
+            <message>Prawdopodobnie literówka. Powinno być: <suggestion>podlegają</suggestion>.</message>
+            <short>Literówka</short>
+            <example correction='podlegają'>Zadania <marker>podleją</marker> zmianie.</example>
+            <example>Zadania podlegają zmianie.</example>
+        </rule>
+        </rulegroup>
     <rule id="TA_POPRAWKA_TA" name="Powtórzenie przymiotnika wokół rzeczownika">
     <antipattern>
     <unify><feature id="gender"/><feature id="number"/><feature id="case"/>

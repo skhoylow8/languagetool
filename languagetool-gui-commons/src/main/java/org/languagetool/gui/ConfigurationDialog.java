@@ -338,6 +338,9 @@ public class ConfigurationDialog implements ActionListener {
       cons.gridy++;
       cons.anchor = GridBagConstraints.WEST;
       jPane.add(getMotherTonguePanel(cons), cons);
+      cons.gridx = 0;
+      cons.gridy++;
+      jPane.add(getNgramPanel(), cons);
     }
     cons.gridy++;
     cons.anchor = GridBagConstraints.WEST;
@@ -1069,7 +1072,7 @@ public class ConfigurationDialog implements ActionListener {
     portPanel.add(saveCacheBox, cons);
 
     cons.gridy++;
-    portPanel.add(getNgramAndWord2VecPanel(), cons);
+    portPanel.add(getNgramPanel(), cons);
   }
   
   private int showRemoteServerHint(Component component, boolean otherServer) {
@@ -1484,7 +1487,7 @@ public class ConfigurationDialog implements ActionListener {
     return motherTonguePanel;
   }
 
-  private JPanel getNgramAndWord2VecPanel() {
+  private JPanel getNgramPanel() {
     JPanel panel = new JPanel();
     panel.setLayout(new GridBagLayout());
     GridBagConstraints cons1 = new GridBagConstraints();
@@ -1495,7 +1498,6 @@ public class ConfigurationDialog implements ActionListener {
     cons1.fill = GridBagConstraints.NONE;
     cons1.weightx = 0.0f;
     addNgramPanel(cons1, panel);
-    cons1.gridy++;
     return panel;
   }
 
@@ -1661,20 +1663,31 @@ public class ConfigurationDialog implements ActionListener {
     cons.fill = GridBagConstraints.NONE;
     cons.insets = new Insets(4, 3, 0, 4);
     
-    Set<String> changedRuleIds;
+    List<String> changedRuleIds;
     if (enabledRules) {
-      changedRuleIds = config.getEnabledRuleIds();
+      changedRuleIds = new ArrayList<String>(config.getEnabledRuleIds());
     } else {
-      changedRuleIds = config.getDisabledRuleIds();
+      changedRuleIds = new ArrayList<String>(config.getDisabledRuleIds());
     }
     
     if (changedRuleIds != null) {
       List<JCheckBox> ruleCheckboxes = new ArrayList<>();
-      for (String ruleId : changedRuleIds) {
+      for (int i = changedRuleIds.size() - 1; i >= 0; i--) {
+        String ruleId = changedRuleIds.get(i);
         String ruleDescription = null;
         for (Rule rule : rules) {
           if (rule.getId().equals(ruleId)) {
-            ruleDescription = rule.getDescription();
+            if ((enabledRules && rule.isDefaultOff() && !rule.isOfficeDefaultOn()) ||
+                (!enabledRules && (!rule.isDefaultOff() || rule.isOfficeDefaultOn()))) {
+              ruleDescription = rule.getDescription();
+            } else {
+              if (enabledRules) {
+                config.removeEnabledRuleId(ruleId);
+              } else {
+                config.removeDisabledRuleId(ruleId);
+              }
+            }
+            
             break;
           }
         }
