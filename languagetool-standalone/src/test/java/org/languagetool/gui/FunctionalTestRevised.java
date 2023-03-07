@@ -115,15 +115,14 @@ public class FunctionalTestRevised {
     textArea.setText("This is is a test");
     ltSupport.disableRule("ENGLISH_WORD_REPEAT_RULE"); // disables rule
     Set<String> disabledRules = ltSupport.getLanguageTool().getDisabledRules();
-
     assertTrue(disabledRules.contains("ENGLISH_WORD_REPEAT_RULE")); // should be in disabled rules set because it was disabled
   }
 
   @Test //5
   public void testEnableRuleFunction() {
     textArea.setText("This is is a test");
+    ltSupport.enableRule("ENGLISH_WORD_REPEAT_RULE"); // enables rule
     Set<String> disabledRules = ltSupport.getLanguageTool().getDisabledRules();
-
     assertTrue(!disabledRules.contains("ENGLISH_WORD_REPEAT_RULE")); // should not be in disabled rules set because it was not disabled
   }
 
