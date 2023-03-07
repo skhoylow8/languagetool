@@ -36,7 +36,7 @@ final class AvsAnData {
   private static final Set<String> requiresA = loadWords("/en/det_a.txt");
   private static final Set<String> requiresAn = loadWords("/en/det_an.txt");
 
-  private AvsAnData() {
+  public AvsAnData() {
   }
 
   static Set<String> getWordsRequiringA() {
